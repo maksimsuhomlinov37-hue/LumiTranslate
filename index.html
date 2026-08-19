@@ -1,611 +1,831 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LumiTranslate</title>
-<link rel="icon" type="image/png" href="data:image/png;base64,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">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-*{font-family:Inter,sans-serif;box-sizing:border-box}
-body{margin:0;min-height:100vh;background:#f5f7fb;color:#1d2330}
-.dark body{background:#0c0e12;color:#e8eaf0}
-textarea::-webkit-scrollbar{display:none}
-.pill{transition:.2s;cursor:pointer} .pill:active{transform:scale(.97)}
-.tab{position:relative;white-space:nowrap;transition:.2s}
-.tab.active{color:#2563ff;font-weight:700}
-.tab.active::after{content:'';position:absolute;bottom:0;left:10px;right:10px;height:2.5px;background:#2563ff;border-radius:2px}
-.word-wrap{position:relative;display:inline-block;margin:0 2px 22px 2px;line-height:1.2}
-.word-wrap .suggest{position:absolute;top:-22px;left:50%;transform:translateX(-50%);background:#2563ff;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:9999px;white-space:nowrap;cursor:pointer;box-shadow:0 4px 12px rgba(37,99,255,.35);animation:pop .2s}
-.word-wrap .typo{border-bottom:2px wavy #ff3b30;padding-bottom:1px}
-@keyframes pop{from{transform:translateX(-50%) scale(.8);opacity:0}to{transform:translateX(-50%) scale(1);opacity:1}}
-.suggestion-bar{padding:10px 16px;min-height:48px;background:#fff9f9;border-bottom:1px solid #ffe1e1;display:flex;flex-wrap:wrap;gap:2px;align-items:flex-start;font-size:16px;line-height:1.6}
-.dark .suggestion-bar{background:#1e1212;border-color:#3a2222}
-.counter{font-size:11px;font-weight:700;padding:4px 8px;border-radius:9999px}
-.counter.ok{background:#eef1f6;color:#7a8191}
-.counter.warn{background:#fff3cd;color:#856404}
-.counter.over{background:#f8d7da;color:#721c24}
-.dark .counter.ok{background:#212531;color:#8b93a3}
-</style>
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LumiTranslate</title>
+    <!-- Фавикон: замените href на свой логотип -->
+    <link rel="icon" type="image/svg+xml" href="https://drive.google.com/uc?export=view&id=11e2dQpCNwiFYsnPhtwuSlw8VIXDuaOg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #f1f4f9;
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark {
+            background: #0b0e14;
+            color: #e8edf5;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px 24px;
+            width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        /* ===== ЛОГОТИП: замените текст L на <img src="..." /> ===== */
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 20px;
+            background: #2563ff;
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(37, 99, 255, 0.2);
+        }
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+        }
+        .logo-text span { color: #2563ff; }
+        .theme-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            border: 1px solid #dce1e9;
+            background: #fff;
+            color: #4a5268;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .dark .theme-btn {
+            background: #1a1f2e;
+            border-color: #2c3346;
+            color: #b0b8cc;
+        }
+        .theme-btn:hover {
+            background: #f0f2f5;
+            transform: scale(0.96);
+        }
+        .dark .theme-btn:hover { background: #262d42; }
+        .theme-btn svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+            border: 1px solid #eef0f5;
+            overflow: hidden;
+            transition: background 0.3s, border 0.3s, box-shadow 0.3s;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .dark .card {
+            background: #131824;
+            border-color: #242b3f;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+        }
+        .lang-bar {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eef0f5;
+            padding: 8px 14px;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .dark .lang-bar { border-color: #242b3f; }
+        .lang-selector {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            padding: 4px 12px 4px 16px;
+            border-radius: 40px;
+            border: 1px solid #dce1e9;
+            background: #f8fafc;
+            transition: 0.2s;
+            height: 34px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #1e293b;
+            user-select: none;
+            flex: 1 1 140px;
+            min-width: 100px;
+            justify-content: space-between;
+        }
+        .dark .lang-selector {
+            background: #1a1f2e;
+            border-color: #2c3346;
+            color: #e8edf5;
+        }
+        .lang-selector:hover { border-color: #2563ff; }
+        .lang-selector .arrow { margin-left:4px; opacity:0.6; }
+        .lang-selector .arrow svg {
+            width:14px; height:14px;
+            stroke:currentColor; stroke-width:2; fill:none;
+        }
+        .swap-btn {
+            width:34px; height:34px; border-radius:50%;
+            border:1px solid #dce1e9; background:#fff;
+            color:#2563ff; display:flex; align-items:center; justify-content:center;
+            cursor:pointer; flex-shrink:0; transition:0.2s;
+        }
+        .dark .swap-btn { background:#131824; border-color:#2c3346; }
+        .swap-btn:hover { background:#f0f2f5; transform:scale(0.92); }
+        .dark .swap-btn:hover { background:#1f263a; }
+        .swap-btn svg {
+            width:18px; height:18px;
+            stroke:currentColor; stroke-width:2; fill:none;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 260px;
+            flex: 1;
+        }
+        @media (max-width: 640px) {
+            .grid { grid-template-columns:1fr; min-height:380px; }
+            .lang-selector { flex:1 1 100px; font-size:12px; height:30px; padding:2px 10px; }
+        }
+        .panel {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 12px 14px 8px;
+        }
+        .panel:first-child { border-right:1px solid #eef0f5; }
+        .dark .panel:first-child { border-color:#242b3f; }
+        @media (max-width: 640px) {
+            .panel:first-child { border-right:none; border-bottom:1px solid #eef0f5; }
+            .dark .panel:first-child { border-color:#242b3f; }
+        }
+        .panel textarea {
+            flex:1; min-height:120px; padding:2px 0 12px;
+            border:none; outline:none; resize:none;
+            font-size:18px; line-height:1.5;
+            font-family:'Inter', sans-serif;
+            background:transparent; color:inherit;
+        }
+        .panel textarea::placeholder { color:#9aa3b9; }
+        .dark .panel textarea::placeholder { color:#4e5974; }
+        .panel .output {
+            flex:1; min-height:120px; padding:2px 0 12px;
+            font-size:18px; line-height:1.5;
+            white-space:pre-wrap; word-break:break-word;
+            color:inherit;
+        }
+        .panel .output.placeholder { color:#9aa3b9; }
+        .dark .panel .output.placeholder { color:#4e5974; }
+        .panel .output.loading {
+            color:#2563ff; font-weight:500; font-size:14px;
+        }
+        .panel-footer {
+            display:flex; justify-content:space-between; align-items:center;
+            padding-top:6px; border-top:1px solid #eef0f5;
+            margin-top:2px; flex-wrap:wrap; gap:6px;
+        }
+        .dark .panel-footer { border-color:#242b3f; }
+        .panel-actions { display:flex; gap:4px; align-items:center; }
+        .icon-btn {
+            width:32px; height:32px; border-radius:8px;
+            border:1px solid #dce1e9; background:#ffffff;
+            color:#4a5268; display:flex; align-items:center; justify-content:center;
+            cursor:pointer; transition:0.2s;
+        }
+        .dark .icon-btn {
+            background:#1a1f2e; border-color:#2c3346; color:#b0b8cc;
+        }
+        .icon-btn:hover { background:#f0f2f5; }
+        .dark .icon-btn:hover { background:#262d42; }
+        .icon-btn.active { color:#2563ff; border-color:#2563ff; }
+        .icon-btn.copied {
+            color:#22c55e; border-color:#22c55e; background:#f0fdf4;
+        }
+        .dark .icon-btn.copied { background:#0a1f14; }
+        .icon-btn svg {
+            width:16px; height:16px;
+            stroke:currentColor; stroke-width:2; fill:none;
+            stroke-linecap:round; stroke-linejoin:round;
+        }
+        .counter {
+            font-size:11px; font-weight:600; padding:2px 10px;
+            border-radius:40px; background:#f0f2f5; color:#6f788f;
+        }
+        .dark .counter { background:#1a1f2e; color:#8e97af; }
+        .counter.warn { background:#fef3c7; color:#92400e; }
+        .dark .counter.warn { background:#2a2410; color:#fbbf24; }
+        .counter.over { background:#fee2e2; color:#991b1b; }
+        .dark .counter.over { background:#2a1414; color:#f87171; }
+        .lang-badge {
+            font-size:10px; font-weight:700; padding:2px 10px;
+            border-radius:40px; background:#eef2ff; color:#2563ff;
+            border:1px solid #2563ff;
+        }
+        .dark .lang-badge { background:#141e3a; }
+
+        /* Modal */
+        .modal-overlay {
+            position:fixed; inset:0; z-index:1000;
+            display:flex; align-items:center; justify-content:center;
+            padding:20px; background:rgba(0,0,0,0.3);
+            backdrop-filter:blur(6px);
+            animation:fadeIn 0.15s ease-out;
+        }
+        @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+        .modal {
+            background:#ffffff; border-radius:24px;
+            max-width:440px; width:100%; max-height:80vh;
+            display:flex; flex-direction:column; overflow:hidden;
+            box-shadow:0 20px 60px rgba(0,0,0,0.15);
+            animation:slideUp 0.15s ease-out;
+        }
+        .dark .modal { background:#131824; }
+        @keyframes slideUp { from{transform:translateY(20px); opacity:0;} to{transform:translateY(0); opacity:1;} }
+        .modal-header {
+            padding:14px 18px 10px; border-bottom:1px solid #eef0f5;
+            display:flex; align-items:center; gap:10px;
+        }
+        .dark .modal-header { border-color:#242b3f; }
+        .modal-header input {
+            flex:1; padding:8px 14px; border-radius:40px;
+            border:1px solid #dce1e9; font-size:14px;
+            font-family:'Inter', sans-serif; background:#f5f7fa;
+            color:#1e293b; outline:none; transition:0.2s;
+        }
+        .dark .modal-header input {
+            background:#0e131f; border-color:#2c3346; color:#e8edf5;
+        }
+        .modal-header input:focus {
+            border-color:#2563ff; box-shadow:0 0 0 3px rgba(37,99,255,0.12);
+        }
+        .modal-close {
+            width:34px; height:34px; border-radius:10px;
+            border:1px solid #dce1e9; background:transparent;
+            color:#6f788f; display:flex; align-items:center; justify-content:center;
+            cursor:pointer; transition:0.2s;
+        }
+        .dark .modal-close { border-color:#2c3346; color:#8e97af; }
+        .modal-close:hover { background:#f0f2f5; }
+        .dark .modal-close:hover { background:#1f263a; }
+        .modal-close svg { width:18px; height:18px; stroke:currentColor; stroke-width:2; fill:none; }
+        .tabs {
+            display:flex; border-bottom:1px solid #eef0f5;
+            padding:0 16px; gap:4px; flex-shrink:0;
+        }
+        .dark .tabs { border-color:#242b3f; }
+        .tab-btn {
+            padding:10px 14px 8px; border:none; background:transparent;
+            font-family:'Inter', sans-serif; font-size:13px;
+            font-weight:500; color:#6f788f; cursor:pointer;
+            border-bottom:2px solid transparent; transition:0.2s;
+        }
+        .dark .tab-btn { color:#8e97af; }
+        .tab-btn.active { color:#2563ff; border-bottom-color:#2563ff; }
+        .tab-btn:hover { color:#1e293b; }
+        .dark .tab-btn:hover { color:#e8edf5; }
+        .modal-list {
+            overflow-y:auto; padding:8px 12px 16px; flex:1;
+        }
+        .lang-item {
+            display:flex; justify-content:space-between; align-items:center;
+            padding:8px 12px; border-radius:10px; cursor:pointer;
+            transition:0.15s; font-size:14px; border:1px solid transparent;
+        }
+        .lang-item:hover { background:#f0f2f5; border-color:#dce1e9; }
+        .dark .lang-item:hover { background:#1a1f2e; border-color:#2c3346; }
+        .lang-item .native { font-weight:500; }
+        .lang-item .name { color:#6f788f; font-size:13px; margin-left:6px; }
+        .dark .lang-item .name { color:#8e97af; }
+        .lang-item .code {
+            font-size:11px; font-weight:600; color:#6f788f;
+            background:#f0f2f5; padding:2px 8px; border-radius:40px;
+        }
+        .dark .lang-item .code { background:#1a1f2e; color:#8e97af; }
+        .lang-item.active { background:#eef2ff; border-color:#2563ff; }
+        .dark .lang-item.active { background:#141e3a; border-color:#2563ff; }
+        .lang-item.active .code { background:#2563ff; color:#fff; }
+        .empty-message { text-align:center; color:#6f788f; font-size:14px; padding:30px 0; }
+        .dark .empty-message { color:#8e97af; }
+    </style>
 </head>
 <body>
-<div id="root"></div>
-<script type="text/babel">
-const {useState,useEffect,useMemo,useRef}=React;
-const LOGO="data:image/png;base64,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";
-const IconCopy=()=><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><rect x="9" y="9" width="13" height="13" rx="2.5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v3"/></svg>;
-const IconCheck=()=><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M20 6L9 17l-5-5"/></svg>;
-const IconVolume=({s})=><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d={s?"M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14":"M15.5 8.5a5 5 0 0 1 0 7"}/></svg>;
-const IconSwap=()=><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12M17 20l4-4M17 20l-4-4"/></svg>;
-const IconX=()=><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>;
-const IconDown=()=><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>;
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <!-- ====== ЗДЕСЬ ВСТАВЬТЕ СВОЙ ЛОГОТИП ====== -->
+                <div class="logo-icon" id="https://drive.google.com/uc?export=view&id=11e2dQpCNwiFYsnPhtwuSlw8VIXDuaOg ">L</div>
+                <div class="logo-text">Lumi<span>Translate</span></div>
+            </div>
+            <button class="theme-btn" id="themeToggle" aria-label="Переключить тему">
+                <!-- Иконка меняется автоматически: луна (светлая) / солнце (тёмная) -->
+                <svg viewBox="0 0 24 24" id="themeIcon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+        </header>
 
+        <div class="card">
+            <div class="lang-bar">
+                <div class="lang-selector" id="fromSelector" data-target="from">
+                    <span id="fromLabel">Русский</span>
+                    <span class="arrow"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
+                </div>
+                <button class="swap-btn" id="swapBtn">
+                    <svg viewBox="0 0 24 24"><path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12M17 20l4-4M17 20l-4-4"/></svg>
+                </button>
+                <div class="lang-selector" id="toSelector" data-target="to">
+                    <span id="toLabel">English</span>
+                    <span class="arrow"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
+                </div>
+            </div>
 
-const LANGS=[
-{code:"en",native:"English",name:"Английский"},
-{code:"ru",native:"Русский",name:"Русский"},
-{code:"kk",native:"Қазақша",name:"Казахский"},
-{code:"tr",native:"Türkçe",name:"Турецкий"},
-{code:"de",native:"Deutsch",name:"Немецкий"},
-{code:"zh",native:"中文",name:"Китайский"},
-{code:"uk",native:"Українська",name:"Украинский"},
-{code:"uz",native:"Oʻzbek",name:"Узбекский"},
-{code:"fr",native:"Français",name:"Французский"},
-{code:"es",native:"Español",name:"Испанский"},
-{code:"it",native:"Italiano",name:"Итальянский"},
-{code:"pt",native:"Português",name:"Португальский"},
-{code:"ja",native:"日本語",name:"Японский"},
-{code:"ko",native:"한국어",name:"Корейский"},
-{code:"ar",native:"العربية",name:"Арабский"},
-{code:"hi",native:"हिन्दी",name:"Хинди"},
-{code:"pl",native:"Polski",name:"Польский"},
-{code:"ky",native:"Кыргызча",name:"Кыргызский"},
-{code:"az",native:"Azərbaycan",name:"Азербайджанский"},
-{code:"tg",native:"Тоҷикӣ",name:"Таджикский"},
-{code:"tt",native:"Татар",name:"Татарский"},
-{code:"ba",native:"Башҡорт",name:"Башкирский"},
-{code:"be",native:"Беларуская",name:"Белорусский"},
-{code:"bg",native:"Български",name:"Болгарский"},
-{code:"cs",native:"Čeština",name:"Чешский"},
-{code:"nl",native:"Nederlands",name:"Голландский"},
-{code:"el",native:"Ελληνικά",name:"Греческий"},
-{code:"he",native:"עברית",name:"Иврит"},
-{code:"id",native:"Indonesia",name:"Индонезийский"},
-{code:"lv",native:"Latviešu",name:"Латышский"},
-{code:"lt",native:"Lietuvių",name:"Литовский"},
-{code:"ro",native:"Română",name:"Румынский"},
-{code:"sr",native:"Српски",name:"Сербский"},
-{code:"sk",native:"Slovenčina",name:"Словацкий"},
-{code:"th",native:"ไทย",name:"Тайский"},
-{code:"vi",native:"Tiếng Việt",name:"Вьетнамский"},
-{code:"fa",native:"فارسی",name:"Персидский"},
-{code:"ur",native:"اردو",name:"Урду"},
-{code:"bn",native:"বাংলা",name:"Бенгальский"},
-{code:"ta",native:"தமிழ்",name:"Тамильский"},
-{code:"te",native:"తెలుగు",name:"Телугу"},
-{code:"ml",native:"മലയാളം",name:"Малаялам"},
-{code:"mr",native:"मराठी",name:"Маратхи"},
-{code:"gu",native:"ગુજરાતી",name:"Гуджарати"},
-{code:"kn",native:"ಕನ್ನಡ",name:"Каннада"},
-{code:"pa",native:"ਪੰਜਾਬੀ",name:"Панджаби"},
-{code:"si",native:"සිංහල",name:"Сингальский"},
-{code:"ne",native:"नेपाली",name:"Непальский"},
-{code:"my",native:"မြန်မာ",name:"Мьянманский"},
-{code:"km",native:"ខ្មែរ",name:"Кхмерский"},
-{code:"lo",native:"ລາວ",name:"Лаосский"},
-{code:"mn",native:"Монгол",name:"Монгольский"},
-{code:"tk",native:"Türkmen",name:"Туркменский"},
-{code:"ce",native:"Нохчийн",name:"Чеченский"},
-{code:"sah",native:"Саха",name:"Якутский"},
-{code:"af",native:"Afrikaans",name:"Африкаанс"},
-{code:"sq",native:"Shqip",name:"Албанский"},
-{code:"am",native:"አማርኛ",name:"Амхарский"},
-{code:"eu",native:"Euskara",name:"Баскский"},
-{code:"bs",native:"Bosanski",name:"Боснийский"},
-{code:"ca",native:"Català",name:"Каталанский"},
-{code:"hr",native:"Hrvatski",name:"Хорватский"},
-{code:"da",native:"Dansk",name:"Датский"},
-{code:"et",native:"Eesti",name:"Эстонский"},
-{code:"fi",native:"Suomi",name:"Финский"},
-{code:"gl",native:"Galego",name:"Галисийский"},
-{code:"hu",native:"Magyar",name:"Венгерский"},
-{code:"is",native:"Íslenska",name:"Исландский"},
-{code:"ga",native:"Gaeilge",name:"Ирландский"},
-{code:"mk",native:"Македонски",name:"Македонский"},
-{code:"ms",native:"Melayu",name:"Малайский"},
-{code:"mt",native:"Malti",name:"Мальтийский"},
-{code:"no",native:"Norsk",name:"Норвежский"},
-{code:"sw",native:"Kiswahili",name:"Суахили"},
-{code:"sv",native:"Svenska",name:"Шведский"},
-{code:"cy",native:"Cymraeg",name:"Валлийский"},
-{code:"zu",native:"isiZulu",name:"Зулу"},
-{code:"ig",native:"Igbo",name:"Игбо"},
-{code:"ha",native:"Hausa",name:"Хауса"},
-{code:"yo",native:"Yorùbá",name:"Йоруба"},
-{code:"so",native:"Soomaali",name:"Сомали"},
-{code:"st",native:"Sesotho",name:"Сесото"},
-{code:"sn",native:"Shona",name:"Шона"},
-{code:"su",native:"Sunda",name:"Сунданский"},
-{code:"tl",native:"Tagalog",name:"Тагалог"},
-{code:"hy",native:"Հայերեն",name:"Армянский"},
-{code:"ka",native:"ქართული",name:"Грузинский"},
-{code:"ak",native:"Akan",name:"Акан"},
-{code:"ay",native:"Aymara",name:"Аймара"},
-{code:"bm",native:"Bambara",name:"Бамбара"},
-{code:"bho",native:"भोजपुरी",name:"Бходжпури"},
-{code:"ceb",native:"Cebuano",name:"Себуано"},
-{code:"ny",native:"Chichewa",name:"Чичева"},
-{code:"co",native:"Corsu",name:"Корсиканский"},
-{code:"ht",native:"Kreyòl Ayisyen",name:"Гаитянский креольский"},
-{code:"dv",native:"ދިވެހި",name:"Дивехи"},
-{code:"eo",native:"Esperanto",name:"Эсперанто"},
-{code:"ee",native:"Eʋegbe",name:"Эве"},
-{code:"fil",native:"Filipino",name:"Филиппинский"},
-{code:"fy",native:"Frysk",name:"Фризский"},
-{code:"lg",native:"Luganda",name:"Ганда"},
-{code:"gn",native:"Avañe'ẽ",name:"Гуарани"},
-{code:"gom",native:"Konkani",name:"Конкани"},
-{code:"kri",native:"Krio",name:"Крио"},
-{code:"ku",native:"Kurdî",name:"Курдский"},
-{code:"ckb",native:"کوردی سۆرانی",name:"Курдский сорани"},
-{code:"lb",native:"Lëtzebuergesch",name:"Люксембургский"},
-{code:"ln",native:"Lingála",name:"Лингала"},
-{code:"mai",native:"मैथिली",name:"Майтхили"},
-{code:"mg",native:"Malagasy",name:"Малагасийский"},
-{code:"mi",native:"Māori",name:"Маори"},
-{code:"mni",native:"Meiteilon",name:"Манипури"},
-{code:"lus",native:"Mizo ṭawng",name:"Мизо"},
-{code:"nso",native:"Sepedi",name:"Северный сото"},
-{code:"om",native:"Oromoo",name:"Оромо"},
-{code:"or",native:"ଓଡ଼ିଆ",name:"Ория"},
-{code:"qu",native:"Runa Simi",name:"Кечуа"},
-{code:"rw",native:"Kinyarwanda",name:"Киньяруанда"},
-{code:"sa",native:"संस्कृतम्",name:"Санскрит"},
-{code:"gd",native:"Gàidhlig",name:"Шотландский гэльский"},
-{code:"sd",native:"سنڌي",name:"Синдхи"},
-{code:"sm",native:"Gagana Samoa",name:"Самоанский"},
-{code:"sl",native:"Slovenščina",name:"Словенский"},
-{code:"ts",native:"Xitsonga",name:"Тсонга"},
-{code:"ti",native:"ትግርኛ",name:"Тигринья"},
-{code:"ug",native:"ئۇيغۇرچە",name:"Уйгурский"},
-{code:"xh",native:"isiXhosa",name:"Коса"},
-{code:"yi",native:"ייִדיש",name:"Идиш"},
-{code:"ab",native:"Аԥсуа",name:"Абхазский"},
-{code:"ady",native:"Адыгэбзэ",name:"Адыгейский"},
-{code:"av",native:"Авар",name:"Аварский"},
-{code:"alt",native:"Алтай тили",name:"Алтайский"},
-{code:"bal",native:"بلوچی",name:"Белуджский"},
-{code:"bcl",native:"Bikol",name:"Бикольский"},
-{code:"ber",native:"Tamaziɣt",name:"Берберский"},
-{code:"bi",native:"Bislama",name:"Бислама"},
-{code:"br",native:"Brezhoneg",name:"Бретонский"},
-{code:"ch",native:"Chamoru",name:"Чаморро"},
-{code:"chr",native:"ᏣᎳᎩ",name:"Чероки"},
-{code:"crs",native:"Kreol Seselwa",name:"Сейшельский креольский"},
-{code:"csb",native:"Kaszëbsczi",name:"Кашубский"},
-{code:"dak",native:"Dakȟótiyapi",name:"Дакота"},
-{code:"din",native:"Thuɔŋjäŋ",name:"Динка"},
-{code:"dzo",native:"Dzongkha",name:"Дзонг-кэ"},
-{code:"fur",native:"Furlan",name:"Фриульский"},
-{code:"gag",native:"Gagauz dili",name:"Гагаузский"},
-{code:"haw",native:"ʻŌlelo Hawaiʻi",name:"Гавайский"},
-{code:"hil",native:"Ilonggo",name:"Хилигайнон"},
-{code:"ilo",native:"Ilokano",name:"Илоканский"},
-{code:"inh",native:"ГӀалгӀай мотт",name:"Ингушский"},
-{code:"iu",native:"ᐃᓄᒃᑎᑐᑦ",name:"Инуктитут"},
-{code:"jv",native:"Basa Jawa",name:"Яванский"},
-{code:"kbd",native:"Адыгэбзэ",name:"Кабардино-черкесский"},
-{code:"kha",native:"Ka Ktien Khasi",name:"Кхаси"},
-{code:"kj",native:"Kuanyama",name:"Кваньяма"},
-{code:"kum",native:"Къумукъ тили",name:"Кумыкский"},
-{code:"kv",native:"Коми кыв",name:"Коми"},
-{code:"lad",native:"Ladino",name:"Ладино"},
-{code:"lez",native:"Лезги чӀал",name:"Лезгинский"},
-{code:"li",native:"Limburgs",name:"Лимбургский"},
-{code:"lmo",native:"Lombard",name:"Ломбардский"},
-{code:"lua",native:"Tshiluba",name:"Луба"},
-{code:"mdf",native:"Мокшень кяль",name:"Мокшанский"},
-{code:"mhr",native:"Олык марий",name:"Луговомарийский"},
-{code:"myv",native:"Эрзянь кель",name:"Эрзянский"},
-{code:"mns",native:"Мāньси",name:"Мансийский"},
-{code:"nap",native:"Napulitano",name:"Неаполитанский"},
-{code:"nog",native:"Ногай тили",name:"Ногайский"},
-{code:"os",native:"Ирон æвзаг",name:"Осетинский"},
-{code:"pap",native:"Papiamentu",name:"Папьяменто"},
-{code:"pms",native:"Piemontèis",name:"Пьемонтский"},
-{code:"rm",native:"Rumantsch",name:"Романшский"},
-{code:"sc",native:"Sardu",name:"Сардинский"},
-{code:"sme",native:"Davvisámegiella",name:"Северносаамский"},
-{code:"sh",native:"Srpskohrvatski",name:"Сербохорватский"},
-{code:"udm",native:"Удмурт кыл",name:"Удмуртский"},
-{code:"vec",native:"Vèneto",name:"Венетский"},
-{code:"vep",native:"Vepsän kel'",name:"Вепсский"},
-{code:"war",native:"Winaray",name:"Варай"},
-{code:"xal",native:"Хальмг келн",name:"Калмыцкий"},
-{code:"yua",native:"Mayaʼ Tʼàan",name:"Юкатекский"},
-{code:"arn",native:"Mapudungun",name:"Мапуче"},
-{code:"as",native:"অসমীয়া",name:"Ассамский"},
-{code:"awa",native:"अवधी",name:"Авадхи"},
-{code:"bug",native:"Basa Ugi",name:"Бугийский"},
-{code:"cdo",native:"閩東語",name:"Восточноминьский"},
-{code:"hak",native:"客家語",name:"Хакка"},
-{code:"pam",native:"Kapampangan",name:"Пампанга"},
-{code:"tet",native:"Tetun",name:"Тетум"},
-{code:"wuu",native:"吳語",name:"Ву"},
-{code:"za",native:"Saeh Vahcuengh",name:"Чжуанский"},
-{code:"gbm",native:"Garhwali",name:"Гархвали"},
-{code:"khi",native:"Khoekhoe",name:"Койсанский"},
-{code:"an",native:"Aragonés",name:"Арагонский"},
-{code:"ayr",native:"Aymara",name:"Аймара южный"},
-{code:"azj",native:"Azərbaycanca",name:"Азербайджанский латиница"},
-{code:"bcc",native:"بلوچی جنوبی",name:"Южнобелуджский"},
-{code:"bqi",native:"بختیاری",name:"Бахтиарский"},
-{code:"brx",native:"बड़ो",name:"Бодо"},
-{code:"chr",native:"Cherokee",name:"Чероки латиница"},
-{code:"cjy",native:"晋语",name:"Цзинь"},
-{code:"ckb",native:"Sorani",name:"Сорани"},
-{code:"cnh",native:"Hakha Chin",name:"Чин хака"},
-{code:"crh",native:"Qırımtatar",name:"Крымскотатарский"},
-{code:"de-AT",native:"Deutsch AT",name:"Немецкий Австрия"},
-{code:"de-CH",native:"Deutsch CH",name:"Немецкий Швейцария"},
-{code:"el-CY",native:"Ελληνικά CY",name:"Греческий Кипр"},
-{code:"en-GB",native:"English UK",name:"Английский Британия"},
-{code:"en-US",native:"English US",name:"Английский США"},
-{code:"es-419",native:"Español 419",name:"Испанский ЛатАм"},
-{code:"fa-AF",native:"دری",name:"Дари"},
-{code:"fr-CA",native:"Français CA",name:"Французский Канада"},
-{code:"gan",native:"贛語",name:"Гань"},
-{code:"haw",native:"Hawaiian",name:"Гавайский"},
-{code:"hne",native:"छत्तीसगढ़ी",name:"Чхаттисгархи"},
-{code:"hye",native:"Armenian West",name:"Армянский западный"},
-{code:"id-JW",native:"Jawa ID",name:"Яванский Индонезия"},
-{code:"ka",native:"Georgian",name:"Грузинский"},
-{code:"khw",native:"کھوار",name:"Кховар"},
-{code:"kok",native:"Konkani Goan",name:"Конкани Гоа"},
-{code:"kpv",native:"Komi-Zyrian",name:"Коми-зырянский"},
-{code:"ks",native:"کٲشُر",name:"Кашмири"},
-{code:"ku-CKB",native:"Kurdish CKB",name:"Курдский центральный"},
-{code:"ky-Arab",native:"Кыргызча Arab",name:"Кыргызский арабский"},
-{code:"lzh",native:"文言",name:"Вэньянь"},
-{code:"mai",native:"Maithili",name:"Майтхили"},
-{code:"mfe",native:"Morisyen",name:"Маврикийский креольский"},
-{code:"ml-Arab",native:"Malayalam Arab",name:"Малаялам арабский"},
-{code:"mni-Mtei",native:"Manipuri Mtei",name:"Манипури"},
-{code:"mrj",native:"Кырык мары",name:"Горномарийский"},
-{code:"ms-Arab",native:"Melayu Arab",name:"Малайский Джави"},
-{code:"mt",native:"Maltese",name:"Мальтийский"},
-{code:"nan",native:"閩南語",name:"Миньнань"},
-{code:"nb",native:"Bokmål",name:"Норвежский букмол"},
-{code:"nn",native:"Nynorsk",name:"Норвежский нюнорск"},
-{code:"nod",native:"ᨣᩤᩴᨾᩮᩬᨦ",name:"Севернотайский"},
-{code:"oc",native:"Occitan",name:"Окситанский"},
-{code:"or",native:"Oriya",name:"Ория"},
-{code:"pa-Arab",native:"پنجابی",name:"Панджаби шахмукхи"},
-{code:"pt-BR",native:"Português BR",name:"Португальский Бразилия"},
-{code:"pt-PT",native:"Português PT",name:"Португальский Португалия"},
-{code:"quc",native:"K'iche'",name:"Киче"},
-{code:"rhg",native:"Rohingya",name:"Рохинджа"},
-{code:"rif",native:"Tarifit",name:"Рифский"},
-{code:"sat",native:"Santali",name:"Сантали"},
-{code:"scn",native:"Sicilianu",name:"Сицилийский"},
-{code:"sd-Deva",native:"Sindhi Deva",name:"Синдхи деванагари"},
-{code:"shn",native:"Shan",name:"Шанский"},
-{code:"szl",native:"Ślōnski",name:"Силезский"},
-{code:"tay",native:"Tayal",name:"Атаяльский"},
-{code:"ttj",native:"Tooro",name:"Тооро"},
-{code:"ug-Arab",native:"Uyghur Arab",name:"Уйгурский арабский"},
-{code:"yue",native:"粵語",name:"Кантонский"},
-{code:"zh-Hans",native:"简体中文",name:"Китайский упрощенный"},
-{code:"zh-Hant",native:"繁體中文",name:"Китайский традиционный"},
-{code:"zu",native:"Zulu",name:"Зулу"},
-{code:"doi",native:"डोगरी",name:"Догри"},
-{code:"raj",native:"राजस्थानी",name:"Раджастхани"},
-{code:"sa",native:"Sanskrit",name:"Санскрит"},
-{code:"nso",native:"Sepedi",name:"Сепеди"},
-{code:"aa",native:"Afar",name:"Афарский"},
-{code:"abq",native:"Абаза",name:"Абазинский"},
-{code:"ace",native:"Aceh",name:"Ачехский"},
-{code:"ach",native:"Acoli",name:"Ачоли"},
-{code:"ada",native:"Adangme",name:"Адангме"},
-{code:"agr",native:"Aguaruna",name:"Агуаруна"},
-{code:"akl",native:"Aklanon",name:"Акланон"},
-{code:"akb",native:"Anuki",name:"Ануки"},
-{code:"aeb",native:"Tunisian Arabic",name:"Тунисский арабский"},
-{code:"aro",native:"Araona",name:"Араона"},
-{code:"arc",native:"Aramaic",name:"Арамейский"},
-{code:"arz",native:"Egyptian Arabic",name:"Египетский арабский"},
-{code:"asb",native:"Assiniboine",name:"Ассинибойн"},
-{code:"azb",native:"South Azerbaijani",name:"Южноазербайджанский"},
-{code:"bal",native:"Balochi",name:"Белуджский"},
-{code:"bar",native:"Bavarian",name:"Баварский"},
-{code:"bax",native:"Bamun",name:"Бамум"},
-{code:"bci",native:"Baoulé",name:"Бауле"},
-{code:"bem",native:"Bemba",name:"Бемба"},
-{code:"bew",native:"Betawi",name:"Бетави"},
-{code:"bjn",native:"Banjar",name:"Банджарский"},
-{code:"bpy",native:"Bishnupriya",name:"Бишнуприя"},
-{code:"bqi",native:"Bakhtiari",name:"Бахтиарский"},
-{code:"brx",native:"Bodo BRX",name:"Бодо"},
-{code:"bs-BA",native:"Bosanski BA",name:"Боснийский BA"},
-{code:"bug",native:"Buginese",name:"Бугийский"},
-{code:"cak",native:"Kaqchikel",name:"Какчикель"},
-{code:"cbl",native:"Bontok",name:"Бонток"},
-{code:"cgg",native:"Chiga",name:"Чига"},
-{code:"chn",native:"Chinook",name:"Чинук"},
-{code:"cjs",native:"Shor",name:"Шорский"},
-{code:"ckt",native:"Chukchi",name:"Чукотский"},
-{code:"crh-Latn",native:"Crimean Tatar Latn",name:"Крымскотатарский лат"},
-{code:"csb",native:"Kashubian",name:"Кашубский"},
-{code:"cym",native:"Welsh Cym",name:"Валлийский"},
-{code:"din",native:"Dinka Din",name:"Динка"},
-{code:"diq",native:"Zazaki",name:"Зазаки"},
-{code:"dsb",native:"Lower Sorbian",name:"Нижнелужицкий"},
-{code:"ebu",native:"Embu",name:"Эмбу"},
-{code:"ecy",native:"Cypriot",name:"Кипрский древний"}
-];
-const POP_FROM=["en","ru","kk","tr"];
-const POP_TO=["ru","kk","en","tr"];
-const MAX_CHARS=5000;
-
-function levenshtein(a,b){
-  const m=a.length,n=b.length; const dp=Array.from({length:m+1},()=>Array(n+1).fill(0));
-  for(let i=0;i<=m;i++) dp[i][0]=i; for(let j=0;j<=n;j++) dp[0][j]=j;
-  for(let i=1;i<=m;i++) for(let j=1;j<=n;j++) dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
-  return dp[m][n];
-}
-const TYPO_MAP={
-en:{"mame":"name","nmae":"name","naem":"name","nane":"name","neme":"name","helo":"hello","helllo":"hello","teh":"the","becasue":"because","yuor":"your","yoru":"your","recieve":"receive","isnt":"isn't","dont":"don't","im":"I'm","id":"I'd","welcom":"welcome","lumi":"Lumi","translat":"Translate"},
-ru:{"привт":"привет","спс":"спасибо","пж":"пожалуйста","пжл":"пожалуйста","щас":"сейчас","счас":"сейчас","што":"что","канешна":"конечно","извени":"извини","здрасти":"здравствуйте","какдила":"как дела","этj":"это","этоj":"это","етот":"этот","ета":"это","зравствуйте":"здравствуйте"}
-};
-
-function correctWord(raw){
-  const m=raw.match(/^([^a-zA-Zа-яА-ЯёЁ0-9]*)([a-zA-Zа-яА-ЯёЁ0-9]+)([^a-zA-Zа-яА-ЯёЁ0-9]*)$/);
-  if(!m) return {orig:raw, fixed:raw, isTypo:false};
-  const [,pre,core,suf]=m;
-  const low=core.toLowerCase();
-  let fixedCore=null;
-  if(TYPO_MAP.en[low]) fixedCore=TYPO_MAP.en[low];
-  else if(TYPO_MAP.ru[low]) fixedCore=TYPO_MAP.ru[low];
-  else if(low.length>=3 && low.length<=6){
-    if(levenshtein(low,"name")===1) fixedCore="name";
-    if(levenshtein(low,"это")===1 && /[а-я]/i.test(low)) fixedCore="это";
-  }
-  if(fixedCore && fixedCore.toLowerCase()!==low){
-    if(core[0]===core[0].toUpperCase()) fixedCore=fixedCore[0].toUpperCase()+fixedCore.slice(1);
-    return {orig:raw, fixed:pre+fixedCore+suf, isTypo:true, suggestion:fixedCore};
-  }
-  return {orig:raw, fixed:raw, isTypo:false};
-}
-
-function smartFix(text){
-  let s=text;
-  s=s.replace(/\bmy\s+mame\s+is\b/gi,"my name is").replace(/\bmy\s+mane\s+is\b/gi,"my name is");
-  s=s.replace(/этj/gi,"это");
-  s=s.split(/(\s+)/).map(t=>{
-    if(/^\s+$/.test(t)) return t;
-    const c=correctWord(t);
-    return c.fixed;
-  }).join("");
-  return s.trim();
-}
-
-function postProcess(src,tgt,sl,tl){
-  let out=tgt;
-  if(!out) return out;
-  // Welcome to LumiTranslate - идеальный перевод
-  if(/welcome\s+to\s+lumitranslate/i.test(src)){
-    if(tl==="ru") return "Добро пожаловать в LumiTranslate";
-    if(tl==="kk") return "LumiTranslate-ке қош келдіңіз";
-    if(tl==="tr") return "LumiTranslate'e hoş geldiniz";
-    if(tl==="en") return "Welcome to LumiTranslate";
-  }
-  if(sl==="en" && tl==="ru"){
-    if(/my\s+name\s+is/i.test(src)){
-      const nameMatch=src.match(/my\s+name\s+is\s+(.+)$/i);
-      const name=nameMatch? nameMatch[1].trim() : "";
-      if(/моя\s+мама/i.test(out)){
-        out=name? `Привет, меня зовут ${name}` : "Привет, меня зовут";
-      }
-      if(/^мое имя/i.test(out) && name){
-        out=out.replace(/^мое имя\s+/i,"Меня зовут ");
-      }
-    }
-    out=out.replace(/\s+([.,!?])/g,"$1");
-  }
-  return out;
-}
-async function googleTranslate(text,sl,tl){
-  const url=`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&dt=bd&dt=at&q=${encodeURIComponent(text)}`;
-  const r=await fetch(url); const j=await r.json();
-  return j[0].map(x=>x[0]).join("");
-}
-async function myMemoryTranslate(text,sl,tl){
-  try{
-    const url=`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sl}|${tl}`;
-    const r=await fetch(url); const j=await r.json();
-    if(j.responseData && j.responseData.translatedText) return j.responseData.translatedText;
-  }catch{} return "";
-}
-
-function App(){
-const [theme,setTheme]=useState("light");
-const [from,setFrom]=useState("en");
-const [to,setTo]=useState("ru");
-const [input,setInput]=useState("Welcome to LumiTranslate");
-const [output,setOutput]=useState("Добро пожаловать в LumiTranslate");
-const [loading,setLoading]=useState(false);
-const [copy,setCopy]=useState(null);
-const [speaking,setSpeaking]=useState(null);
-const [picker,setPicker]=useState(null);
-const [search,setSearch]=useState("");
-const cache=useRef(new Map());
-const timer=useRef(null);
-const isDark=theme==="dark";
-
-const filtered=useMemo(()=>{
-  const q=search.toLowerCase().trim(); if(!q) return LANGS;
-  return LANGS.filter(l=>l.code.toLowerCase().includes(q)||l.name.toLowerCase().includes(q)||l.native.toLowerCase().includes(q));
-},[search]);
-
-const tokens=useMemo(()=>{
-  if(!input) return [];
-  return input.split(/(\s+)/).map((t,i)=>{
-    if(/^\s+$/.test(t)) return {text:t,isSpace:true,idx:i};
-    const corr=correctWord(t);
-    return {text:t,isSpace:false,idx:i,corr};
-  });
-},[input]);
-
-async function translate(text,sl,tl){
-  if(!text.trim()) return "";
-  const fixed=smartFix(text);
-  const key=`${sl}|${tl}|${fixed}`; if(cache.current.has(key)) return cache.current.get(key);
-  let res="";
-  try{ res=await googleTranslate(fixed,sl,tl); }catch{ res=""; }
-  const bad=!res || (sl==="en" && tl==="ru" && /моя\s+мама/i.test(res) && /my\s+name\s+is/i.test(fixed));
-  if(bad){
-    const alt=await myMemoryTranslate(fixed,sl,tl);
-    if(alt) res=alt;
-  }
-  res=postProcess(fixed,res,sl,tl);
-  cache.current.set(key,res); return res;
-}
-
-useEffect(()=>{
-  if(timer.current) clearTimeout(timer.current);
-  if(!input.trim()){setOutput("");return;}
-  timer.current=setTimeout(async()=>{ setLoading(true); const r=await translate(input,from,to); if(r) setOutput(r); setLoading(false); },300);
-},[input,from,to]);
-
-const handleInputChange=(e)=>{
-  let v=e.target.value;
-  if(v.length>MAX_CHARS) v=v.slice(0,MAX_CHARS);
-  setInput(v);
-};
-const applyCorrection=(idx,corrected)=>{
-  const newTokens=[...tokens];
-  newTokens[idx].text=corrected;
-  const newText=newTokens.map(t=>t.text).join("");
-  setInput(newText.slice(0,MAX_CHARS));
-};
-
-const handleCopy=async(t,id)=>{
-  let ok=false;
-  try{ if(navigator.clipboard && window.isSecureContext){ await navigator.clipboard.writeText(t); ok=true; } }catch{}
-  if(!ok){
-    try{ const ta=document.createElement("textarea"); ta.value=t; ta.style.position="fixed"; ta.style.left="-9999px"; document.body.appendChild(ta); ta.focus(); ta.select(); ok=document.execCommand("copy"); document.body.removeChild(ta); }catch{}
-  }
-  if(ok){ setCopy(id); setTimeout(()=>setCopy(null),1500); }
-};
-const speak=(text,code,id)=>{
-  if(!text) return;
-  if(speaking===id){ speechSynthesis.cancel(); setSpeaking(null); return; }
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text); u.lang=code==="kk"?"ru-RU":code; u.onend=()=>setSpeaking(null); u.onerror=()=>setSpeaking(null);
-  setSpeaking(id); setTimeout(()=>speechSynthesis.speak(u),50);
-};
-
-const bg=isDark?"#0c0e12":"#f5f7fb"; const cardBg=isDark?"#171a21":"#ffffff"; const border=isDark?"#262a33":"#e6e8ee";
-const txt=isDark?"#e8eaf0":"#1d2330"; const muted=isDark?"#8b93a3":"#7a8191"; const blue="#2563ff"; const blueSoft=isDark?"#1a2744":"#eaf2ff";
-const countClass = input.length>4800 ? (input.length>=MAX_CHARS?"over":"warn") : "ok";
-
-return (
-<div style={{background:bg,color:txt,minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center"}}>
-  <header style={{width:"100%",maxWidth:1160,padding:"0 20px",height:64,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-    <div style={{display:"flex",alignItems:"center",gap:12}}>
-      <img src={LOGO} alt="logo" style={{width:40,height:40,borderRadius:10}}/>
-      <div style={{fontWeight:800,fontSize:19}}>LumiTranslate</div>
+            <div class="grid">
+                <div class="panel">
+                    <textarea id="inputText" placeholder="Введите текст для перевода…">Welcome to LumiTranslate</textarea>
+                    <div class="panel-footer">
+                        <div class="panel-actions">
+                            <button class="icon-btn" id="voiceBtn" title="Голосовой ввод">
+                                <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4M8 23h8"/></svg>
+                            </button>
+                            <button class="icon-btn" id="speakInBtn" title="Озвучить">
+                                <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+                            </button>
+                            <button class="icon-btn" id="copyInBtn" title="Копировать">
+                                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2.5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v3"/></svg>
+                            </button>
+                        </div>
+                        <span class="counter" id="counter">0 / 5000</span>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="output" id="outputText">Добро пожаловать в LumiTranslate</div>
+                    <div class="panel-footer">
+                        <div class="panel-actions">
+                            <button class="icon-btn" id="speakOutBtn" title="Озвучить">
+                                <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+                            </button>
+                            <button class="icon-btn" id="copyOutBtn" title="Копировать">
+                                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2.5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v3"/></svg>
+                            </button>
+                        </div>
+                        <span class="lang-badge" id="langBadge">EN</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <button onClick={()=>setTheme(isDark?"light":"dark")} className="pill" style={{width:40,height:40,borderRadius:9999,border:`1px solid ${border}`,background:cardBg,color:muted,display:"flex",alignItems:"center",justifyContent:"center"}}>{isDark?"☀":"🌙"}</button>
-  </header>
 
-  <main style={{width:"100%",maxWidth:1160,padding:"8px 16px 10px"}}>
-    <div style={{width:"100%",background:cardBg,border:`1px solid ${border}`,borderRadius:22,overflow:"hidden",boxShadow:isDark?"none":"0 12px 40px rgba(16,24,40,.08)"}}>
-      <div style={{display:"flex",width:"100%",alignItems:"stretch",position:"relative",borderBottom:`1px solid ${border}`}}>
-        <div style={{flex:1,display:"flex",alignItems:"center",gap:0,padding:"0 10px",height:52,overflowX:"auto"}}>
-          {POP_FROM.map(code=>{ const l=LANGS.find(x=>x.code===code); return <button key={code} onClick={()=>setFrom(code)} className={"tab pill "+(from===code?"active":"")} style={{padding:"0 12px",height:"100%",border:"none",background:"transparent",color:from===code?blue:muted,fontSize:14}}>{l?.native||code}</button> })}
-          <button onClick={()=>{setPicker("from");setSearch("");}} className="pill" style={{marginLeft:6,display:"flex",alignItems:"center",gap:4,padding:"6px 10px",borderRadius:9999,border:`1px solid ${border}`,background:isDark?"#212531":"#f2f4f8",color:muted,fontSize:12,fontWeight:600}}>Еще <IconDown/></button>
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <input type="text" id="searchInput" placeholder="Поиск языка…" />
+                <button class="modal-close" id="modalClose">
+                    <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="tabs" id="tabsContainer">
+                <button class="tab-btn active" data-tab="recent">Недавние</button>
+                <button class="tab-btn" data-tab="popular">Популярные</button>
+                <button class="tab-btn" data-tab="all">Все</button>
+            </div>
+            <div class="modal-list" id="modalList"></div>
         </div>
-        <button onClick={()=>{const a=from;setFrom(to);setTo(a);setInput(output);setOutput(input);}} className="pill" style={{position:"absolute",left:"50%",top:"50%",transform:"translate(-50%,-50%)",width:40,height:40,borderRadius:9999,border:`1px solid ${border}`,background:cardBg,color:blue,display:"flex",alignItems:"center",justifyContent:"center",zIndex:2}}><IconSwap/></button>
-        <div style={{flex:1,display:"flex",alignItems:"center",gap:0,padding:"0 10px 0 52px",height:52,overflowX:"auto"}}>
-          {POP_TO.map(code=>{ const l=LANGS.find(x=>x.code===code); return <button key={code} onClick={()=>setTo(code)} className={"tab pill "+(to===code?"active":"")} style={{padding:"0 12px",height:"100%",border:"none",background:"transparent",color:to===code?blue:muted,fontSize:14}}>{l?.native||code}</button> })}
-          <button onClick={()=>{setPicker("to");setSearch("");}} className="pill" style={{marginLeft:6,display:"flex",alignItems:"center",gap:4,padding:"6px 10px",borderRadius:9999,border:`1px solid ${border}`,background:isDark?"#212531":"#f2f4f8",color:muted,fontSize:12,fontWeight:600}}>Еще <IconDown/></button>
-        </div>
-      </div>
+    </div>
 
-      {tokens.some(t=>!t.isSpace && t.corr && t.corr.isTypo) && (
-        <div className="suggestion-bar">
-          {tokens.map((t,i)=>{
-            if(t.isSpace) return <span key={i}>{t.text}</span>;
-            if(t.corr && t.corr.isTypo){
-              return (
-                <span key={i} className="word-wrap" onClick={()=>applyCorrection(i,t.corr.fixed)}>
-                  <span className="suggest">{t.corr.suggestion || t.corr.fixed}</span>
-                  <span className="typo">{t.text}</span>
-                </span>
-              );
+    <script>
+        // ============================================================
+        //  LumiTranslate — финальная версия
+        // ============================================================
+
+        const LANGS = [
+            { code: 'en', name: 'Английский', native: 'English' },
+            { code: 'ru', name: 'Русский', native: 'Русский' },
+            { code: 'kk', name: 'Казахский', native: 'Қазақша' },
+            { code: 'tr', name: 'Турецкий', native: 'Türkçe' },
+            { code: 'de', name: 'Немецкий', native: 'Deutsch' },
+            { code: 'fr', name: 'Французский', native: 'Français' },
+            { code: 'es', name: 'Испанский', native: 'Español' },
+            { code: 'zh', name: 'Китайский', native: '中文' },
+            { code: 'ar', name: 'Арабский', native: 'العربية' },
+            { code: 'hi', name: 'Хинди', native: 'हिन्दी' },
+            { code: 'ja', name: 'Японский', native: '日本語' },
+            { code: 'ko', name: 'Корейский', native: '한국어' },
+            { code: 'pt', name: 'Португальский', native: 'Português' },
+            { code: 'it', name: 'Итальянский', native: 'Italiano' },
+            { code: 'nl', name: 'Голландский', native: 'Nederlands' },
+            { code: 'pl', name: 'Польский', native: 'Polski' },
+            { code: 'uk', name: 'Украинский', native: 'Українська' },
+            { code: 'uz', name: 'Узбекский', native: 'Oʻzbek' },
+            { code: 'id', name: 'Индонезийский', native: 'Indonesia' },
+            { code: 'ms', name: 'Малайский', native: 'Melayu' },
+            { code: 'th', name: 'Тайский', native: 'ไทย' },
+            { code: 'vi', name: 'Вьетнамский', native: 'Tiếng Việt' },
+            { code: 'fa', name: 'Персидский', native: 'فارسی' },
+            { code: 'ur', name: 'Урду', native: 'اردو' },
+            { code: 'he', name: 'Иврит', native: 'עברית' },
+            { code: 'el', name: 'Греческий', native: 'Ελληνικά' },
+            { code: 'cs', name: 'Чешский', native: 'Čeština' },
+            { code: 'sv', name: 'Шведский', native: 'Svenska' },
+            { code: 'no', name: 'Норвежский', native: 'Norsk' },
+            { code: 'da', name: 'Датский', native: 'Dansk' },
+            { code: 'fi', name: 'Финский', native: 'Suomi' },
+            { code: 'hu', name: 'Венгерский', native: 'Magyar' },
+            { code: 'ro', name: 'Румынский', native: 'Română' },
+            { code: 'bg', name: 'Болгарский', native: 'Български' },
+            { code: 'sr', name: 'Сербский', native: 'Српски' },
+            { code: 'hr', name: 'Хорватский', native: 'Hrvatski' },
+            { code: 'sl', name: 'Словенский', native: 'Slovenščina' },
+            { code: 'et', name: 'Эстонский', native: 'Eesti' },
+            { code: 'lv', name: 'Латышский', native: 'Latviešu' },
+            { code: 'lt', name: 'Литовский', native: 'Lietuvių' },
+            { code: 'af', name: 'Африкаанс', native: 'Afrikaans' },
+            { code: 'sw', name: 'Суахили', native: 'Kiswahili' },
+            { code: 'ta', name: 'Тамильский', native: 'தமிழ்' },
+            { code: 'te', name: 'Телугу', native: 'తెలుగు' },
+            { code: 'ml', name: 'Малаялам', native: 'മലയാളം' },
+            { code: 'kn', name: 'Каннада', native: 'ಕನ್ನಡ' },
+            { code: 'gu', name: 'Гуджарати', native: 'ગુજરાતી' },
+            { code: 'mr', name: 'Маратхи', native: 'मराठी' },
+            { code: 'pa', name: 'Панджаби', native: 'ਪੰਜਾਬੀ' },
+            { code: 'bn', name: 'Бенгальский', native: 'বাংলা' },
+            { code: 'my', name: 'Мьянманский', native: 'မြန်မာ' },
+            { code: 'km', name: 'Кхмерский', native: 'ខ្មែរ' },
+            { code: 'lo', name: 'Лаосский', native: 'ລາວ' },
+            { code: 'mn', name: 'Монгольский', native: 'Монгол' },
+            { code: 'ne', name: 'Непальский', native: 'नेपाली' },
+            { code: 'si', name: 'Сингальский', native: 'සිංහල' },
+        ];
+
+        const POPULAR_CODES = ['en', 'ru', 'kk', 'tr', 'zh'];
+
+        // DOM
+        const fromSelector = document.getElementById('fromSelector');
+        const toSelector = document.getElementById('toSelector');
+        const fromLabel = document.getElementById('fromLabel');
+        const toLabel = document.getElementById('toLabel');
+        const swapBtn = document.getElementById('swapBtn');
+        const inputText = document.getElementById('inputText');
+        const outputText = document.getElementById('outputText');
+        const counter = document.getElementById('counter');
+        const langBadge = document.getElementById('langBadge');
+        const voiceBtn = document.getElementById('voiceBtn');
+        const speakInBtn = document.getElementById('speakInBtn');
+        const speakOutBtn = document.getElementById('speakOutBtn');
+        const copyInBtn = document.getElementById('copyInBtn');
+        const copyOutBtn = document.getElementById('copyOutBtn');
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const logoIcon = document.getElementById('logoIcon');
+
+        const modalOverlay = document.getElementById('modalOverlay');
+        const searchInput = document.getElementById('searchInput');
+        const modalList = document.getElementById('modalList');
+        const modalClose = document.getElementById('modalClose');
+        const tabsContainer = document.getElementById('tabsContainer');
+
+        // State
+        let currentFrom = 'ru';
+        let currentTo = 'en';
+        let currentOutput = '';
+        let translateTimer = null;
+        let recentLangs = JSON.parse(localStorage.getItem('recentLangs') || '[]');
+        if (recentLangs.length > 5) recentLangs = recentLangs.slice(0, 5);
+        let activeTarget = 'from';
+
+        function getLangByCode(code) {
+            return LANGS.find(l => l.code === code) || { code, name: code, native: code };
+        }
+
+        function updateLabels() {
+            const fromLang = getLangByCode(currentFrom);
+            const toLang = getLangByCode(currentTo);
+            fromLabel.textContent = fromLang.native;
+            toLabel.textContent = toLang.native;
+            langBadge.textContent = currentTo.toUpperCase();
+        }
+
+        function saveRecent(code) {
+            recentLangs = recentLangs.filter(c => c !== code);
+            recentLangs.unshift(code);
+            if (recentLangs.length > 5) recentLangs = recentLangs.slice(0, 5);
+            localStorage.setItem('recentLangs', JSON.stringify(recentLangs));
+        }
+
+        // Translation
+        async function translateText(text, sl, tl) {
+            if (!text.trim()) return '';
+            try {
+                const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q=${encodeURIComponent(text)}`;
+                const resp = await fetch(url);
+                const data = await resp.json();
+                if (data && data[0]) {
+                    return data[0].map(item => item[0]).join('');
+                }
+            } catch (e) {
+                console.warn('Google Translate error, trying MyMemory...');
             }
-            return <span key={i} style={{margin:"0 2px"}}>{t.text}</span>;
-          })}
-        </div>
-      )}
+            try {
+                const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sl}|${tl}`;
+                const resp = await fetch(url);
+                const data = await resp.json();
+                if (data.responseData && data.responseData.translatedText) {
+                    return data.responseData.translatedText;
+                }
+            } catch (e) {}
+            throw new Error('Перевод недоступен');
+        }
 
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",minHeight:360}}>
-        <div style={{position:"relative",display:"flex",flexDirection:"column",borderRight:`1px solid ${border}`}}>
-          <textarea value={input} onChange={handleInputChange} maxLength={MAX_CHARS} placeholder="Введите текст..." style={{flex:1,minHeight:260,padding:"20px 20px 64px",background:"transparent",border:"none",outline:"none",resize:"none",fontSize:20,lineHeight:1.5,color:txt}}/>
-          {input && <button onClick={()=>setInput("")} className="pill" style={{position:"absolute",top:14,right:14,width:28,height:28,borderRadius:9999,border:`1px solid ${border}`,background:isDark?"#212531":"#f2f4f8",color:muted,display:"flex",alignItems:"center",justifyContent:"center"}}><IconX/></button>}
-          <div style={{height:1,background:border}}></div>
-          <div style={{padding:"10px 14px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-            <div style={{display:"flex",gap:6}}>
-              <button onClick={()=>speak(input,from,"in")} className="pill" style={{width:38,height:38,borderRadius:12,border:`1px solid ${border}`,background:cardBg,color:speaking==="in"?blue:muted,display:"flex",alignItems:"center",justifyContent:"center"}}><IconVolume s={speaking==="in"}/></button>
-              <button onClick={()=>handleCopy(input,"in")} className="pill" style={{width:38,height:38,borderRadius:12,border:`1px solid ${copy==="in"?blue:border}`,background:copy==="in"?blueSoft:cardBg,color:copy==="in"?blue:muted,display:"flex",alignItems:"center",justifyContent:"center"}}>{copy==="in"?<IconCheck/>:<IconCopy/>}</button>
-            </div>
-            <span className={`counter ${countClass}`}>{input.length} / {MAX_CHARS}</span>
-          </div>
-        </div>
-        <div style={{position:"relative",display:"flex",flexDirection:"column",background:output?blueSoft:"transparent"}}>
-          <div style={{flex:1,padding:"20px",overflow:"auto"}}>
-            {loading ? <div style={{color:blue,fontWeight:600,fontSize:14}}>Переводим...</div> : output ? <div style={{fontSize:20,lineHeight:1.55,whiteSpace:"pre-wrap"}}>{output}</div> : <span style={{color:muted,fontSize:20}}>Перевод</span>}
-          </div>
-          <div style={{height:1,background:border}}></div>
-          <div style={{padding:"10px 14px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-            <div style={{display:"flex",gap:6}}>
-              <button onClick={()=>speak(output,to,"out")} className="pill" style={{width:38,height:38,borderRadius:12,border:`1px solid ${border}`,background:cardBg,color:blue,display:"flex",alignItems:"center",justifyContent:"center"}}><IconVolume s={speaking==="out"}/></button>
-              <button onClick={()=>handleCopy(output,"out")} className="pill" style={{width:38,height:38,borderRadius:12,border:`1px solid ${border}`,background:cardBg,color:blue,display:"flex",alignItems:"center",justifyContent:"center"}}>{copy==="out"?<IconCheck/>:<IconCopy/>}</button>
-            </div>
-            <span style={{fontSize:11,fontWeight:700,color:blue,background:cardBg,border:`1px solid ${blue}`,padding:"4px 8px",borderRadius:9999}}>{to.toUpperCase()}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div style={{textAlign:"center",marginTop:14,fontSize:12,color:muted,lineHeight:1.5}}>
-      Это переводчик, он может ошибаться. Проверяйте важные переводы.<br/>
-      <span style={{fontSize:11}}>300 языков •  • Лимит 5000 символов</span>
-    </div>
-  </main>
+        async function performTranslation() {
+            const text = inputText.value;
+            const sl = currentFrom;
+            const tl = currentTo;
+            if (!text.trim()) {
+                outputText.textContent = '';
+                outputText.classList.remove('loading', 'placeholder');
+                return;
+            }
+            outputText.textContent = 'Переводим…';
+            outputText.classList.add('loading');
+            outputText.classList.remove('placeholder');
+            try {
+                const result = await translateText(text, sl, tl);
+                currentOutput = result;
+                outputText.textContent = result;
+                outputText.classList.remove('loading');
+            } catch (e) {
+                outputText.textContent = 'Ошибка: ' + e.message;
+                outputText.classList.remove('loading');
+                outputText.classList.add('placeholder');
+            }
+        }
 
-  {picker && (
-    <div style={{position:"fixed",inset:0,zIndex:60,display:"flex",alignItems:"center",justifyContent:"center",padding:16}}>
-      <div style={{position:"absolute",inset:0,background:"rgba(12,14,18,0.4)",backdropFilter:"blur(10px)"}} onClick={()=>setPicker(null)}></div>
-      <div style={{position:"relative",width:"100%",maxWidth:480,maxHeight:"80vh",borderRadius:20,background:cardBg,border:`1px solid ${border}`,display:"flex",flexDirection:"column",overflow:"hidden"}}>
-        <div style={{padding:14,borderBottom:`1px solid ${border}`,display:"flex",gap:10,alignItems:"center"}}>
-          <input autoFocus value={search} onChange={e=>setSearch(e.target.value)} placeholder="Поиск 300 языков..." style={{flex:1,height:42,padding:"0 14px",borderRadius:12,border:`1px solid ${blue}`,background:blueSoft,color:txt,outline:"none"}}/>
-          <span style={{fontSize:11,color:muted}}>{filtered.length} / 300</span>
-          <button onClick={()=>setPicker(null)} className="pill" style={{width:42,height:42,borderRadius:12,border:`1px solid ${border}`,background:cardBg}}><IconX/></button>
-        </div>
-        <div style={{flex:1,overflow:"auto",padding:8,display:"grid",gap:4}}>
-          {filtered.map(l=>{const active=(picker==="from"?from:to)===l.code;return <button key={l.code+l.native} onClick={()=>{if(picker==="from")setFrom(l.code);else setTo(l.code);setPicker(null);}} className="pill" style={{textAlign:"left",padding:"12px 14px",borderRadius:12,background:active?blueSoft:cardBg,border:`1px solid ${active?blue:border}`,display:"flex",justifyContent:"space-between"}}><span><b style={{color:active?blue:txt}}>{l.native}</b> <span style={{color:muted,fontSize:12}}>• {l.name}</span></span><span style={{fontSize:11,fontWeight:800}}>{l.code.toUpperCase()}</span></button>})}
-        </div>
-      </div>
-    </div>
-  )}
-</div>
-);
-}
-ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
-</script>
+        function scheduleTranslation() {
+            if (translateTimer) clearTimeout(translateTimer);
+            translateTimer = setTimeout(performTranslation, 400);
+        }
+
+        function setLanguage(target, code) {
+            if (target === 'from') {
+                currentFrom = code;
+                saveRecent(code);
+            } else {
+                currentTo = code;
+                saveRecent(code);
+            }
+            updateLabels();
+            scheduleTranslation();
+            if (target === 'to') langBadge.textContent = currentTo.toUpperCase();
+        }
+
+        // Modal
+        function openModal(target) {
+            activeTarget = target;
+            modalOverlay.style.display = 'flex';
+            searchInput.value = '';
+            renderTab('recent');
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.tab-btn[data-tab="recent"]').classList.add('active');
+            searchInput.focus();
+        }
+
+        function closeModal() {
+            modalOverlay.style.display = 'none';
+        }
+
+        function renderTab(tab) {
+            const search = searchInput.value.toLowerCase().trim();
+            let list = [];
+            if (tab === 'recent') {
+                if (recentLangs.length === 0) {
+                    modalList.innerHTML = `<div class="empty-message">Вы ещё не выбирали языки</div>`;
+                    return;
+                }
+                list = recentLangs.map(code => getLangByCode(code));
+            } else if (tab === 'popular') {
+                list = POPULAR_CODES.map(code => getLangByCode(code));
+            } else {
+                list = LANGS;
+            }
+            if (search) {
+                list = list.filter(l =>
+                    l.name.toLowerCase().includes(search) ||
+                    l.native.toLowerCase().includes(search) ||
+                    l.code.includes(search)
+                );
+            }
+            if (list.length === 0) {
+                modalList.innerHTML = `<div class="empty-message">Языков не найдено</div>`;
+                return;
+            }
+            const seen = new Set();
+            list = list.filter(l => {
+                if (seen.has(l.code)) return false;
+                seen.add(l.code);
+                return true;
+            });
+            const currentCode = activeTarget === 'from' ? currentFrom : currentTo;
+            let html = '';
+            list.forEach(l => {
+                const active = l.code === currentCode ? 'active' : '';
+                html += `
+                    <div class="lang-item ${active}" data-code="${l.code}">
+                        <span><span class="native">${l.native}</span> <span class="name">• ${l.name}</span></span>
+                        <span class="code">${l.code.toUpperCase()}</span>
+                    </div>
+                `;
+            });
+            modalList.innerHTML = html;
+            document.querySelectorAll('.lang-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const code = item.dataset.code;
+                    setLanguage(activeTarget, code);
+                    closeModal();
+                });
+            });
+        }
+
+        fromSelector.addEventListener('click', () => openModal('from'));
+        toSelector.addEventListener('click', () => openModal('to'));
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+        tabsContainer.addEventListener('click', (e) => {
+            const btn = e.target.closest('.tab-btn');
+            if (!btn) return;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderTab(btn.dataset.tab);
+        });
+        searchInput.addEventListener('input', () => {
+            const activeTab = document.querySelector('.tab-btn.active');
+            if (activeTab) renderTab(activeTab.dataset.tab);
+        });
+
+        // Swap
+        swapBtn.addEventListener('click', () => {
+            const temp = currentFrom;
+            currentFrom = currentTo;
+            currentTo = temp;
+            updateLabels();
+            saveRecent(currentFrom);
+            saveRecent(currentTo);
+            const tempText = inputText.value;
+            inputText.value = currentOutput;
+            outputText.textContent = '';
+            currentOutput = '';
+            scheduleTranslation();
+            langBadge.textContent = currentTo.toUpperCase();
+        });
+
+        // Voice
+        voiceBtn.addEventListener('click', () => {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert('Голосовой ввод поддерживается только в Chrome.');
+                return;
+            }
+            if (voiceBtn.classList.contains('active')) {
+                if (window.recognition) window.recognition.stop();
+                voiceBtn.classList.remove('active');
+                return;
+            }
+            const rec = new SpeechRecognition();
+            rec.lang = currentFrom;
+            rec.continuous = false;
+            rec.interimResults = false;
+            rec.onstart = () => voiceBtn.classList.add('active');
+            rec.onresult = (e) => {
+                const transcript = e.results[0][0].transcript;
+                inputText.value += ' ' + transcript;
+                inputText.dispatchEvent(new Event('input'));
+            };
+            rec.onerror = () => voiceBtn.classList.remove('active');
+            rec.onend = () => voiceBtn.classList.remove('active');
+            window.recognition = rec;
+            rec.start();
+        });
+
+        // Speak
+        function speak(text, lang) {
+            if (!text) return;
+            if (window.speechSynthesis) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                speechSynthesis.speak(utterance);
+            }
+        }
+        speakInBtn.addEventListener('click', () => speak(inputText.value, currentFrom));
+        speakOutBtn.addEventListener('click', () => speak(currentOutput || outputText.textContent, currentTo));
+
+        // Copy
+        function copy(text, btn) {
+            if (!text) return;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    btn.classList.add('copied');
+                    setTimeout(() => btn.classList.remove('copied'), 1500);
+                }).catch(() => fallbackCopy(text, btn));
+            } else {
+                fallbackCopy(text, btn);
+            }
+        }
+        function fallbackCopy(text, btn) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+                document.execCommand('copy');
+                btn.classList.add('copied');
+                setTimeout(() => btn.classList.remove('copied'), 1500);
+            } catch (e) {}
+            document.body.removeChild(ta);
+        }
+        copyInBtn.addEventListener('click', () => copy(inputText.value, copyInBtn));
+        copyOutBtn.addEventListener('click', () => copy(currentOutput || outputText.textContent, copyOutBtn));
+
+        // Counter
+        inputText.addEventListener('input', () => {
+            const len = inputText.value.length;
+            counter.textContent = len + ' / 5000';
+            if (len > 4800) {
+                counter.classList.add('warn');
+                if (len >= 5000) counter.classList.add('over');
+            } else {
+                counter.classList.remove('warn', 'over');
+            }
+            scheduleTranslation();
+        });
+
+        // ========== ТЕМА С УЛУЧШЕННЫМИ ИКОНКАМИ ==========
+        let isDark = localStorage.getItem('theme') === 'dark';
+        const sunIcon = `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m4.93 19.07 1.41-1.41"/><path d="m17.66 6.34 1.41-1.41"/></svg>`;
+        const moonIcon = `<svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
+
+        function setTheme(dark) {
+            isDark = dark;
+            document.body.classList.toggle('dark', dark);
+            localStorage.setItem('theme', dark ? 'dark' : 'light');
+            themeIcon.innerHTML = dark ? sunIcon : moonIcon;
+        }
+
+        // Инициализация темы
+        setTheme(isDark);
+
+        themeToggle.addEventListener('click', () => {
+            setTheme(!isDark);
+        });
+
+        // Init
+        if (recentLangs.length >= 2) {
+            currentFrom = recentLangs[0];
+            currentTo = recentLangs[1];
+        } else if (recentLangs.length === 1) {
+            currentFrom = recentLangs[0];
+        }
+        if (!LANGS.find(l => l.code === currentFrom)) currentFrom = 'ru';
+        if (!LANGS.find(l => l.code === currentTo)) currentTo = 'en';
+        updateLabels();
+        langBadge.textContent = currentTo.toUpperCase();
+        setTimeout(performTranslation, 300);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        console.log('LumiTranslate загружен. Иконки солнца/луны обновлены.');
+    </script>
 </body>
 </html>
