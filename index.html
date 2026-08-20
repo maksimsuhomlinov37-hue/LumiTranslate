@@ -2,82 +2,89 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>LumiTranslate</title>
-    <!-- Фавикон: замените href на свой логотип -->
-    <link rel="icon" type="image/svg+xml" href="LumiTranslate-Favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
+        /* ===== БАЗА ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Inter', -apple-system, sans-serif;
             background: #f1f4f9;
             color: #1e293b;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            transition: background 0.3s, color 0.3s;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: background 0.6s ease, color 0.6s ease;
         }
         body.dark {
             background: #0b0e14;
             color: #e8edf5;
         }
         .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px 16px 24px;
             width: 100%;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            max-width: 700px;
         }
+
+        /* ===== ХЕДЕР ===== */
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-bottom: 16px;
-            flex-wrap: wrap;
-            gap: 10px;
+            padding: 0 4px 20px 4px;
         }
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
-        /* ===== ЛОГОТИП: замените текст L на <img src="..." /> ===== */
         .logo-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: #2563ff;
+            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 20px;
-            background: transparent;
-            color: #fff;
-            box-shadow: none;
+            font-size: 22px;
+            box-shadow: 0 6px 20px rgba(37, 99, 255, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .logo-icon:hover {
+            transform: scale(1.04);
+            box-shadow: 0 8px 28px rgba(37, 99, 255, 0.35);
         }
         .logo-text {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
-            letter-spacing: -0.2px;
+            letter-spacing: -0.3px;
         }
-        .logo-text span { color: #2563ff; }
+        .logo-text span {
+            color: #2563ff;
+        }
         .theme-btn {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
             border: 1px solid #dce1e9;
-            background: #fff;
+            background: #ffffff;
             color: #4a5268;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
         .dark .theme-btn {
             background: #1a1f2e;
@@ -85,10 +92,12 @@
             color: #b0b8cc;
         }
         .theme-btn:hover {
+            transform: scale(0.94);
             background: #f0f2f5;
-            transform: scale(0.96);
         }
-        .dark .theme-btn:hover { background: #262d42; }
+        .dark .theme-btn:hover {
+            background: #262d42;
+        }
         .theme-btn svg {
             width: 22px;
             height: 22px;
@@ -97,258 +106,876 @@
             fill: none;
             stroke-linecap: round;
             stroke-linejoin: round;
+            transition: transform 0.5s ease;
         }
+        .theme-btn:active svg {
+            transform: rotate(360deg);
+        }
+
+        /* ===== КАРТОЧКА ===== */
         .card {
             background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+            border-radius: 28px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.04);
             border: 1px solid #eef0f5;
             overflow: hidden;
-            transition: background 0.3s, border 0.3s, box-shadow 0.3s;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            transition: background 0.5s ease, border 0.5s ease, box-shadow 0.5s ease,
+                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease;
+            opacity: 0;
+            transform: translateY(30px) scale(0.97);
+            animation: cardIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        @keyframes cardIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.97);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
         .dark .card {
             background: #131824;
             border-color: #242b3f;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
         }
+
+        /* ===== ЯЗЫКОВАЯ ПАНЕЛЬ ===== */
         .lang-bar {
             display: flex;
             align-items: center;
+            padding: 12px 16px 10px 16px;
+            gap: 10px;
             border-bottom: 1px solid #eef0f5;
-            padding: 8px 14px;
-            gap: 8px;
-            flex-wrap: wrap;
+            transition: border 0.4s ease;
         }
-        .dark .lang-bar { border-color: #242b3f; }
+        .dark .lang-bar {
+            border-color: #242b3f;
+        }
         .lang-selector {
             display: flex;
             align-items: center;
             gap: 6px;
-            cursor: pointer;
-            padding: 4px 12px 4px 16px;
+            padding: 6px 14px 6px 18px;
             border-radius: 40px;
             border: 1px solid #dce1e9;
             background: #f8fafc;
-            transition: 0.2s;
-            height: 34px;
-            font-size: 13px;
+            cursor: pointer;
+            height: 38px;
+            font-size: 14px;
             font-weight: 500;
             color: #1e293b;
-            user-select: none;
             flex: 1 1 140px;
             min-width: 100px;
             justify-content: space-between;
+            transition: all 0.25s ease;
+            user-select: none;
+            position: relative;
+        }
+        .lang-selector::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 40px;
+            background: #2563ff;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+        }
+        .lang-selector:active::after {
+            opacity: 0.08;
         }
         .dark .lang-selector {
             background: #1a1f2e;
             border-color: #2c3346;
             color: #e8edf5;
         }
-        .lang-selector:hover { border-color: #2563ff; }
-        .lang-selector .arrow { margin-left:4px; opacity:0.6; }
+        .lang-selector:hover {
+            border-color: #2563ff;
+            transform: scale(1.01);
+        }
+        .lang-selector:active {
+            transform: scale(0.97);
+        }
+        .lang-selector .arrow {
+            margin-left: 4px;
+            opacity: 0.5;
+            transition: transform 0.3s ease;
+        }
+        .lang-selector:hover .arrow {
+            transform: rotate(180deg);
+        }
         .lang-selector .arrow svg {
-            width:14px; height:14px;
-            stroke:currentColor; stroke-width:2; fill:none;
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
         }
+
         .swap-btn {
-            width:34px; height:34px; border-radius:50%;
-            border:1px solid #dce1e9; background:#fff;
-            color:#2563ff; display:flex; align-items:center; justify-content:center;
-            cursor:pointer; flex-shrink:0; transition:0.2s;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid #dce1e9;
+            background: #ffffff;
+            color: #2563ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
         }
-        .dark .swap-btn { background:#131824; border-color:#2c3346; }
-        .swap-btn:hover { background:#f0f2f5; transform:scale(0.92); }
-        .dark .swap-btn:hover { background:#1f263a; }
+        .dark .swap-btn {
+            background: #131824;
+            border-color: #2c3346;
+        }
+        .swap-btn:hover {
+            background: #f0f2f5;
+            transform: scale(1.06) rotate(10deg);
+        }
+        .dark .swap-btn:hover {
+            background: #1f263a;
+        }
+        .swap-btn:active {
+            transform: scale(0.88) rotate(-20deg);
+        }
         .swap-btn svg {
-            width:18px; height:18px;
-            stroke:currentColor; stroke-width:2; fill:none;
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            transition: transform 0.5s ease;
         }
+        .swap-btn:hover svg {
+            transform: rotate(180deg);
+        }
+
+        /* ===== ГРИД ===== */
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            min-height: 260px;
-            flex: 1;
+            min-height: 280px;
         }
         @media (max-width: 640px) {
-            .grid { grid-template-columns:1fr; min-height:380px; }
-            .lang-selector { flex:1 1 100px; font-size:12px; height:30px; padding:2px 10px; }
+            .grid {
+                grid-template-columns: 1fr;
+                min-height: 380px;
+            }
         }
+
         .panel {
             display: flex;
             flex-direction: column;
+            padding: 16px 16px 10px 16px;
             position: relative;
-            padding: 12px 14px 8px;
+            transition: background 0.4s ease;
         }
-        .panel:first-child { border-right:1px solid #eef0f5; }
-        .dark .panel:first-child { border-color:#242b3f; }
+        .panel:first-child {
+            border-right: 1px solid #eef0f5;
+        }
+        .dark .panel:first-child {
+            border-color: #242b3f;
+        }
         @media (max-width: 640px) {
-            .panel:first-child { border-right:none; border-bottom:1px solid #eef0f5; }
-            .dark .panel:first-child { border-color:#242b3f; }
+            .panel:first-child {
+                border-right: none;
+                border-bottom: 1px solid #eef0f5;
+            }
+            .dark .panel:first-child {
+                border-color: #242b3f;
+            }
         }
+
         .panel textarea {
-            flex:1; min-height:120px; padding:2px 0 12px;
-            border:none; outline:none; resize:none;
-            font-size:18px; line-height:1.5;
-            font-family:'Inter', sans-serif;
-            background:transparent; color:inherit;
+            flex: 1;
+            min-height: 130px;
+            padding: 2px 0 12px 0;
+            border: none;
+            outline: none;
+            resize: none;
+            font-size: 18px;
+            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background: transparent;
+            color: inherit;
+            transition: color 0.4s ease;
         }
-        .panel textarea::placeholder { color:#9aa3b9; }
-        .dark .panel textarea::placeholder { color:#4e5974; }
+        .panel textarea::placeholder {
+            color: #9aa3b9;
+            transition: color 0.4s ease;
+        }
+        .dark .panel textarea::placeholder {
+            color: #4e5974;
+        }
+
         .panel .output {
-            flex:1; min-height:120px; padding:2px 0 12px;
-            font-size:18px; line-height:1.5;
-            white-space:pre-wrap; word-break:break-word;
-            color:inherit;
+            flex: 1;
+            min-height: 130px;
+            padding: 2px 0 12px 0;
+            font-size: 18px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-break: break-word;
+            color: inherit;
+            transition: color 0.4s ease, opacity 0.4s ease;
         }
-        .panel .output.placeholder { color:#9aa3b9; }
-        .dark .panel .output.placeholder { color:#4e5974; }
+        .panel .output.placeholder {
+            color: #9aa3b9;
+        }
+        .dark .panel .output.placeholder {
+            color: #4e5974;
+        }
         .panel .output.loading {
-            color:#2563ff; font-weight:500; font-size:14px;
+            color: #2563ff;
+            font-weight: 500;
+            font-size: 15px;
+            animation: pulseText 1.2s ease-in-out infinite;
         }
+        @keyframes pulseText {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        /* ===== ФУТЕР ===== */
         .panel-footer {
-            display:flex; justify-content:space-between; align-items:center;
-            padding-top:6px; border-top:1px solid #eef0f5;
-            margin-top:2px; flex-wrap:wrap; gap:6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 8px;
+            border-top: 1px solid #eef0f5;
+            margin-top: 4px;
+            flex-wrap: wrap;
+            gap: 6px;
+            transition: border 0.4s ease;
         }
-        .dark .panel-footer { border-color:#242b3f; }
-        .panel-actions { display:flex; gap:4px; align-items:center; }
+        .dark .panel-footer {
+            border-color: #242b3f;
+        }
+        .panel-actions {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
         .icon-btn {
-            width:32px; height:32px; border-radius:8px;
-            border:1px solid #dce1e9; background:#ffffff;
-            color:#4a5268; display:flex; align-items:center; justify-content:center;
-            cursor:pointer; transition:0.2s;
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            border: 1px solid #dce1e9;
+            background: #ffffff;
+            color: #4a5268;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
         }
         .dark .icon-btn {
-            background:#1a1f2e; border-color:#2c3346; color:#b0b8cc;
+            background: #1a1f2e;
+            border-color: #2c3346;
+            color: #b0b8cc;
         }
-        .icon-btn:hover { background:#f0f2f5; }
-        .dark .icon-btn:hover { background:#262d42; }
-        .icon-btn.active { color:#2563ff; border-color:#2563ff; }
+        .icon-btn:hover {
+            background: #f0f2f5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+        .dark .icon-btn:hover {
+            background: #262d42;
+        }
+        .icon-btn:active {
+            transform: scale(0.90);
+        }
+        .icon-btn.active {
+            color: #2563ff;
+            border-color: #2563ff;
+            background: #eef2ff;
+        }
+        .dark .icon-btn.active {
+            background: #141e3a;
+        }
         .icon-btn.copied {
-            color:#22c55e; border-color:#22c55e; background:#f0fdf4;
+            color: #22c55e;
+            border-color: #22c55e;
+            background: #f0fdf4;
+            animation: pop 0.3s ease;
         }
-        .dark .icon-btn.copied { background:#0a1f14; }
+        .dark .icon-btn.copied {
+            background: #0a1f14;
+        }
+        @keyframes pop {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
         .icon-btn svg {
-            width:16px; height:16px;
-            stroke:currentColor; stroke-width:2; fill:none;
-            stroke-linecap:round; stroke-linejoin:round;
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
-        .counter {
-            font-size:11px; font-weight:600; padding:2px 10px;
-            border-radius:40px; background:#f0f2f5; color:#6f788f;
+        .icon-btn .tooltip {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%) scale(0.8);
+            background: #1a1a2e;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.25s ease;
         }
-        .dark .counter { background:#1a1f2e; color:#8e97af; }
-        .counter.warn { background:#fef3c7; color:#92400e; }
-        .dark .counter.warn { background:#2a2410; color:#fbbf24; }
-        .counter.over { background:#fee2e2; color:#991b1b; }
-        .dark .counter.over { background:#2a1414; color:#f87171; }
-        .lang-badge {
-            font-size:10px; font-weight:700; padding:2px 10px;
-            border-radius:40px; background:#eef2ff; color:#2563ff;
-            border:1px solid #2563ff;
+        .dark .icon-btn .tooltip {
+            background: #e8edf5;
+            color: #1a1a2e;
         }
-        .dark .lang-badge { background:#141e3a; }
+        .icon-btn:hover .tooltip {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+        .icon-btn .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: #1a1a2e;
+        }
+        .dark .icon-btn .tooltip::after {
+            border-top-color: #e8edf5;
+        }
 
-        /* Modal */
+        .counter {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 12px;
+            border-radius: 40px;
+            background: #f0f2f5;
+            color: #6f788f;
+            transition: all 0.3s ease;
+        }
+        .dark .counter {
+            background: #1a1f2e;
+            color: #8e97af;
+        }
+        .counter.warn {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .dark .counter.warn {
+            background: #2a2410;
+            color: #fbbf24;
+        }
+        .counter.over {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .dark .counter.over {
+            background: #2a1414;
+            color: #f87171;
+        }
+
+        .lang-badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 40px;
+            background: #eef2ff;
+            color: #2563ff;
+            border: 1px solid #2563ff;
+            transition: all 0.4s ease;
+        }
+        .dark .lang-badge {
+            background: #141e3a;
+        }
+
+        /* ===== МОДАЛКА ВЫБОРА ЯЗЫКА ===== */
         .modal-overlay {
-            position:fixed; inset:0; z-index:1000;
-            display:flex; align-items:center; justify-content:center;
-            padding:20px; background:rgba(0,0,0,0.3);
-            backdrop-filter:blur(6px);
-            animation:fadeIn 0.15s ease-out;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0);
+            backdrop-filter: blur(0px);
+            transition: background 0.4s ease, backdrop-filter 0.4s ease;
         }
-        @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+        .modal-overlay.open {
+            display: flex;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+        }
         .modal {
-            background:#ffffff; border-radius:24px;
-            max-width:440px; width:100%; max-height:80vh;
-            display:flex; flex-direction:column; overflow:hidden;
-            box-shadow:0 20px 60px rgba(0,0,0,0.15);
-            animation:slideUp 0.15s ease-out;
+            background: #ffffff;
+            border-radius: 28px;
+            max-width: 440px;
+            width: 100%;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+            transform: scale(0.92) translateY(20px);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.4s ease;
         }
-        .dark .modal { background:#131824; }
-        @keyframes slideUp { from{transform:translateY(20px); opacity:0;} to{transform:translateY(0); opacity:1;} }
+        .modal-overlay.open .modal {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+        .dark .modal {
+            background: #131824;
+        }
         .modal-header {
-            padding:14px 18px 10px; border-bottom:1px solid #eef0f5;
-            display:flex; align-items:center; gap:10px;
+            padding: 16px 18px 12px 18px;
+            border-bottom: 1px solid #eef0f5;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: border 0.4s ease;
         }
-        .dark .modal-header { border-color:#242b3f; }
+        .dark .modal-header {
+            border-color: #242b3f;
+        }
         .modal-header input {
-            flex:1; padding:8px 14px; border-radius:40px;
-            border:1px solid #dce1e9; font-size:14px;
-            font-family:'Inter', sans-serif; background:#f5f7fa;
-            color:#1e293b; outline:none; transition:0.2s;
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: 40px;
+            border: 1px solid #dce1e9;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fa;
+            color: #1e293b;
+            outline: none;
+            transition: all 0.25s ease;
         }
         .dark .modal-header input {
-            background:#0e131f; border-color:#2c3346; color:#e8edf5;
+            background: #0e131f;
+            border-color: #2c3346;
+            color: #e8edf5;
         }
         .modal-header input:focus {
-            border-color:#2563ff; box-shadow:0 0 0 3px rgba(37,99,255,0.12);
+            border-color: #2563ff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 255, 0.12);
+            transform: scale(1.01);
         }
         .modal-close {
-            width:34px; height:34px; border-radius:10px;
-            border:1px solid #dce1e9; background:transparent;
-            color:#6f788f; display:flex; align-items:center; justify-content:center;
-            cursor:pointer; transition:0.2s;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #dce1e9;
+            background: transparent;
+            color: #6f788f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
         }
-        .dark .modal-close { border-color:#2c3346; color:#8e97af; }
-        .modal-close:hover { background:#f0f2f5; }
-        .dark .modal-close:hover { background:#1f263a; }
-        .modal-close svg { width:18px; height:18px; stroke:currentColor; stroke-width:2; fill:none; }
+        .dark .modal-close {
+            border-color: #2c3346;
+            color: #8e97af;
+        }
+        .modal-close:hover {
+            background: #f0f2f5;
+            transform: rotate(90deg);
+        }
+        .dark .modal-close:hover {
+            background: #1f263a;
+        }
+        .modal-close svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
         .tabs {
-            display:flex; border-bottom:1px solid #eef0f5;
-            padding:0 16px; gap:4px; flex-shrink:0;
+            display: flex;
+            border-bottom: 1px solid #eef0f5;
+            padding: 0 16px;
+            gap: 4px;
+            flex-shrink: 0;
+            transition: border 0.4s ease;
         }
-        .dark .tabs { border-color:#242b3f; }
+        .dark .tabs {
+            border-color: #242b3f;
+        }
         .tab-btn {
-            padding:10px 14px 8px; border:none; background:transparent;
-            font-family:'Inter', sans-serif; font-size:13px;
-            font-weight:500; color:#6f788f; cursor:pointer;
-            border-bottom:2px solid transparent; transition:0.2s;
+            padding: 12px 14px 10px 14px;
+            border: none;
+            background: transparent;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: #6f788f;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.25s ease;
         }
-        .dark .tab-btn { color:#8e97af; }
-        .tab-btn.active { color:#2563ff; border-bottom-color:#2563ff; }
-        .tab-btn:hover { color:#1e293b; }
-        .dark .tab-btn:hover { color:#e8edf5; }
+        .dark .tab-btn {
+            color: #8e97af;
+        }
+        .tab-btn.active {
+            color: #2563ff;
+            border-bottom-color: #2563ff;
+        }
+        .tab-btn:hover {
+            color: #1e293b;
+        }
+        .dark .tab-btn:hover {
+            color: #e8edf5;
+        }
         .modal-list {
-            overflow-y:auto; padding:8px 12px 16px; flex:1;
+            overflow-y: auto;
+            padding: 8px 12px 16px;
+            flex: 1;
         }
         .lang-item {
-            display:flex; justify-content:space-between; align-items:center;
-            padding:8px 12px; border-radius:10px; cursor:pointer;
-            transition:0.15s; font-size:14px; border:1px solid transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            border: 1px solid transparent;
         }
-        .lang-item:hover { background:#f0f2f5; border-color:#dce1e9; }
-        .dark .lang-item:hover { background:#1a1f2e; border-color:#2c3346; }
-        .lang-item .native { font-weight:500; }
-        .lang-item .name { color:#6f788f; font-size:13px; margin-left:6px; }
-        .dark .lang-item .name { color:#8e97af; }
+        .lang-item:hover {
+            background: #f0f2f5;
+            border-color: #dce1e9;
+            transform: translateX(4px);
+        }
+        .dark .lang-item:hover {
+            background: #1a1f2e;
+            border-color: #2c3346;
+        }
+        .lang-item:active {
+            transform: scale(0.97);
+        }
+        .lang-item .native {
+            font-weight: 500;
+        }
+        .lang-item .name {
+            color: #6f788f;
+            font-size: 13px;
+            margin-left: 6px;
+        }
+        .dark .lang-item .name {
+            color: #8e97af;
+        }
         .lang-item .code {
-            font-size:11px; font-weight:600; color:#6f788f;
-            background:#f0f2f5; padding:2px 8px; border-radius:40px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #6f788f;
+            background: #f0f2f5;
+            padding: 2px 10px;
+            border-radius: 40px;
+            transition: all 0.25s ease;
         }
-        .dark .lang-item .code { background:#1a1f2e; color:#8e97af; }
-        .lang-item.active { background:#eef2ff; border-color:#2563ff; }
-        .dark .lang-item.active { background:#141e3a; border-color:#2563ff; }
-        .lang-item.active .code { background:#2563ff; color:#fff; }
-        .empty-message { text-align:center; color:#6f788f; font-size:14px; padding:30px 0; }
-        .dark .empty-message { color:#8e97af; }
+        .dark .lang-item .code {
+            background: #1a1f2e;
+            color: #8e97af;
+        }
+        .lang-item.active {
+            background: #eef2ff;
+            border-color: #2563ff;
+        }
+        .dark .lang-item.active {
+            background: #141e3a;
+            border-color: #2563ff;
+        }
+        .lang-item.active .code {
+            background: #2563ff;
+            color: #fff;
+        }
+        .empty-message {
+            text-align: center;
+            color: #6f788f;
+            font-size: 14px;
+            padding: 40px 0;
+        }
+        .dark .empty-message {
+            color: #8e97af;
+        }
+
+        /* ==============================================================
+           ПРОФЕССИОНАЛЬНАЯ МИНИМАЛИСТИЧНАЯ АНИМАЦИЯ ГОЛОСА
+           ============================================================== */
+        .voice-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0);
+            backdrop-filter: blur(0px);
+            transition: background 0.5s ease, backdrop-filter 0.5s ease;
+        }
+        .voice-overlay.open {
+            display: flex;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+        .voice-container {
+            background: #ffffff;
+            border-radius: 40px;
+            padding: 40px 32px 32px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+            transform: scale(0.9) translateY(20px);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.4s ease;
+        }
+        .voice-overlay.open .voice-container {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+        .dark .voice-container {
+            background: #1a1f2e;
+            color: #e8edf5;
+        }
+
+        /* Круг и кольца */
+        .voice-circle-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 10px auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .voice-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #4f46e5, #2563ff);
+            box-shadow: 0 0 30px rgba(37, 99, 255, 0.3);
+            transition: transform 0.2s ease;
+            z-index: 2;
+            position: relative;
+        }
+        .voice-circle.pulse {
+            animation: pulseSoft 1.4s ease-in-out infinite;
+        }
+        @keyframes pulseSoft {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 30px rgba(37, 99, 255, 0.3);
+            }
+            50% {
+                transform: scale(1.08);
+                box-shadow: 0 0 60px rgba(37, 99, 255, 0.6);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 30px rgba(37, 99, 255, 0.3);
+            }
+        }
+
+        /* Кольца */
+        .ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(37, 99, 255, 0.15);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .ring.active {
+            animation: ringExpand 2s ease-out infinite;
+        }
+        .ring:nth-child(2) {
+            width: 90px;
+            height: 90px;
+            animation-delay: 0s;
+        }
+        .ring:nth-child(3) {
+            width: 110px;
+            height: 110px;
+            animation-delay: 0.6s;
+        }
+        .ring:nth-child(4) {
+            width: 130px;
+            height: 130px;
+            animation-delay: 1.2s;
+        }
+
+        @keyframes ringExpand {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.6;
+                border-width: 2px;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.6);
+                opacity: 0;
+                border-width: 1px;
+            }
+        }
+
+        /* Текст в модалке */
+        .voice-text {
+            font-size: 20px;
+            font-weight: 500;
+            min-height: 40px;
+            margin: 12px 0 4px;
+            color: #1e293b;
+            transition: color 0.3s ease;
+            word-break: break-word;
+        }
+        .dark .voice-text {
+            color: #e8edf5;
+        }
+        .voice-text.interim {
+            color: #2563ff;
+            font-weight: 400;
+            font-size: 18px;
+        }
+        .voice-text.final {
+            color: #22c55e;
+            font-weight: 600;
+            font-size: 22px;
+        }
+        .voice-hint {
+            font-size: 14px;
+            color: #6f788f;
+            margin-top: 6px;
+        }
+        .dark .voice-hint {
+            color: #9aa3b9;
+        }
+        .voice-close-btn {
+            margin-top: 20px;
+            padding: 10px 24px;
+            border-radius: 40px;
+            border: none;
+            background: #2563ff;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .voice-close-btn:hover {
+            background: #1d4ed8;
+        }
+        .voice-close-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0;
+            }
+            .card {
+                border-radius: 20px;
+            }
+            .lang-selector {
+                font-size: 12px;
+                height: 34px;
+                padding: 4px 10px 4px 14px;
+                min-width: 70px;
+            }
+            .swap-btn {
+                width: 34px;
+                height: 34px;
+            }
+            .panel textarea,
+            .panel .output {
+                font-size: 16px;
+                min-height: 100px;
+            }
+            .logo-text {
+                font-size: 18px;
+            }
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+            .header {
+                padding-bottom: 14px;
+            }
+            .voice-container {
+                padding: 28px 20px 24px;
+                border-radius: 28px;
+                max-width: 320px;
+            }
+            .voice-circle-wrapper {
+                width: 90px;
+                height: 90px;
+            }
+            .voice-circle {
+                width: 55px;
+                height: 55px;
+            }
+            .ring:nth-child(2) {
+                width: 70px;
+                height: 70px;
+            }
+            .ring:nth-child(3) {
+                width: 85px;
+                height: 85px;
+            }
+            .ring:nth-child(4) {
+                width: 100px;
+                height: 100px;
+            }
+            .voice-text {
+                font-size: 18px;
+                min-height: 30px;
+            }
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
         <header class="header">
             <div class="logo">
-                <!-- ====== ЗДЕСЬ ВСТАВЬТЕ СВОЙ ЛОГОТИП ====== -->
-                <div class="logo-icon" id="logoIcon">
-  <img src="LumiTranslate-Favicon.png" alt="LumiTranslate" style="width:100%;height:100%;border-radius:12px;object-fit:cover;">
-</div>
+                <div class="logo-icon">L</div>
                 <div class="logo-text">Lumi<span>Translate</span></div>
             </div>
             <button class="theme-btn" id="themeToggle" aria-label="Переключить тему">
-                <!-- Иконка меняется автоматически: луна (светлая) / солнце (тёмная) -->
                 <svg viewBox="0 0 24 24" id="themeIcon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
             </button>
         </header>
@@ -356,14 +983,14 @@
         <div class="card">
             <div class="lang-bar">
                 <div class="lang-selector" id="fromSelector" data-target="from">
-                    <span id="fromLabel">Русский</span>
+                    <span class="label" id="fromLabel">English</span>
                     <span class="arrow"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
                 </div>
                 <button class="swap-btn" id="swapBtn">
                     <svg viewBox="0 0 24 24"><path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12M17 20l4-4M17 20l-4-4"/></svg>
                 </button>
                 <div class="lang-selector" id="toSelector" data-target="to">
-                    <span id="toLabel">English</span>
+                    <span class="label" id="toLabel">Русский</span>
                     <span class="arrow"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
                 </div>
             </div>
@@ -373,39 +1000,45 @@
                     <textarea id="inputText" placeholder="Введите текст для перевода…">Welcome to LumiTranslate</textarea>
                     <div class="panel-footer">
                         <div class="panel-actions">
-                            <button class="icon-btn" id="voiceBtn" title="Голосовой ввод">
+                            <button class="icon-btn" id="voiceBtn">
                                 <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v4M8 23h8"/></svg>
+                                <span class="tooltip">Голосовой ввод</span>
                             </button>
-                            <button class="icon-btn" id="speakInBtn" title="Озвучить">
+                            <button class="icon-btn" id="speakInBtn">
                                 <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+                                <span class="tooltip">Озвучить</span>
                             </button>
-                            <button class="icon-btn" id="copyInBtn" title="Копировать">
+                            <button class="icon-btn" id="copyInBtn">
                                 <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2.5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v3"/></svg>
+                                <span class="tooltip">Копировать</span>
                             </button>
                         </div>
                         <span class="counter" id="counter">0 / 5000</span>
                     </div>
                 </div>
+
                 <div class="panel">
-                    <div class="output" id="outputText">Добро пожаловать в LumiTranslate</div>
+                    <div class="output placeholder" id="outputText">Перевод появится здесь</div>
                     <div class="panel-footer">
                         <div class="panel-actions">
-                            <button class="icon-btn" id="speakOutBtn" title="Озвучить">
+                            <button class="icon-btn" id="speakOutBtn">
                                 <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+                                <span class="tooltip">Озвучить</span>
                             </button>
-                            <button class="icon-btn" id="copyOutBtn" title="Копировать">
+                            <button class="icon-btn" id="copyOutBtn">
                                 <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2.5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v3"/></svg>
+                                <span class="tooltip">Копировать</span>
                             </button>
                         </div>
-                        <span class="lang-badge" id="langBadge">EN</span>
+                        <span class="lang-badge" id="langBadge">RU</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal-overlay" id="modalOverlay" style="display: none;">
+    <!-- ===== МОДАЛКА ВЫБОРА ЯЗЫКА ===== -->
+    <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
             <div class="modal-header">
                 <input type="text" id="searchInput" placeholder="Поиск языка…" />
@@ -422,11 +1055,27 @@
         </div>
     </div>
 
-    <script>
-        // ============================================================
-        //  LumiTranslate — финальная версия
-        // ============================================================
+    <!-- ===== МОДАЛКА ГОЛОСА ===== -->
+    <div class="voice-overlay" id="voiceOverlay">
+        <div class="voice-container">
+            <div class="voice-circle-wrapper" id="voiceCircleWrapper">
+                <div class="voice-circle" id="voiceCircle"></div>
+                <div class="ring" id="ring1"></div>
+                <div class="ring" id="ring2"></div>
+                <div class="ring" id="ring3"></div>
+            </div>
+            <div class="voice-text" id="voiceText">Говорите…</div>
+            <div class="voice-hint" id="voiceHint">Нажмите «Остановить», чтобы завершить</div>
+            <button class="voice-close-btn" id="voiceCloseBtn">Остановить</button>
+        </div>
+    </div>
 
+    <script>
+        // ================================================================
+        //  LUMITRANSLATE — ИСПРАВЛЕННАЯ ВЕРСИЯ
+        // ================================================================
+
+        // ----- ДАННЫЕ ЯЗЫКОВ (краткий список) -----
         const LANGS = [
             { code: 'en', name: 'Английский', native: 'English' },
             { code: 'ru', name: 'Русский', native: 'Русский' },
@@ -436,8 +1085,6 @@
             { code: 'fr', name: 'Французский', native: 'Français' },
             { code: 'es', name: 'Испанский', native: 'Español' },
             { code: 'zh', name: 'Китайский', native: '中文' },
-            { code: 'ar', name: 'Арабский', native: 'العربية' },
-            { code: 'hi', name: 'Хинди', native: 'हिन्दी' },
             { code: 'ja', name: 'Японский', native: '日本語' },
             { code: 'ko', name: 'Корейский', native: '한국어' },
             { code: 'pt', name: 'Португальский', native: 'Português' },
@@ -445,50 +1092,10 @@
             { code: 'nl', name: 'Голландский', native: 'Nederlands' },
             { code: 'pl', name: 'Польский', native: 'Polski' },
             { code: 'uk', name: 'Украинский', native: 'Українська' },
-            { code: 'uz', name: 'Узбекский', native: 'Oʻzbek' },
-            { code: 'id', name: 'Индонезийский', native: 'Indonesia' },
-            { code: 'ms', name: 'Малайский', native: 'Melayu' },
-            { code: 'th', name: 'Тайский', native: 'ไทย' },
-            { code: 'vi', name: 'Вьетнамский', native: 'Tiếng Việt' },
-            { code: 'fa', name: 'Персидский', native: 'فارسی' },
-            { code: 'ur', name: 'Урду', native: 'اردو' },
-            { code: 'he', name: 'Иврит', native: 'עברית' },
-            { code: 'el', name: 'Греческий', native: 'Ελληνικά' },
-            { code: 'cs', name: 'Чешский', native: 'Čeština' },
-            { code: 'sv', name: 'Шведский', native: 'Svenska' },
-            { code: 'no', name: 'Норвежский', native: 'Norsk' },
-            { code: 'da', name: 'Датский', native: 'Dansk' },
-            { code: 'fi', name: 'Финский', native: 'Suomi' },
-            { code: 'hu', name: 'Венгерский', native: 'Magyar' },
-            { code: 'ro', name: 'Румынский', native: 'Română' },
-            { code: 'bg', name: 'Болгарский', native: 'Български' },
-            { code: 'sr', name: 'Сербский', native: 'Српски' },
-            { code: 'hr', name: 'Хорватский', native: 'Hrvatski' },
-            { code: 'sl', name: 'Словенский', native: 'Slovenščina' },
-            { code: 'et', name: 'Эстонский', native: 'Eesti' },
-            { code: 'lv', name: 'Латышский', native: 'Latviešu' },
-            { code: 'lt', name: 'Литовский', native: 'Lietuvių' },
-            { code: 'af', name: 'Африкаанс', native: 'Afrikaans' },
-            { code: 'sw', name: 'Суахили', native: 'Kiswahili' },
-            { code: 'ta', name: 'Тамильский', native: 'தமிழ்' },
-            { code: 'te', name: 'Телугу', native: 'తెలుగు' },
-            { code: 'ml', name: 'Малаялам', native: 'മലയാളം' },
-            { code: 'kn', name: 'Каннада', native: 'ಕನ್ನಡ' },
-            { code: 'gu', name: 'Гуджарати', native: 'ગુજરાતી' },
-            { code: 'mr', name: 'Маратхи', native: 'मराठी' },
-            { code: 'pa', name: 'Панджаби', native: 'ਪੰਜਾਬੀ' },
-            { code: 'bn', name: 'Бенгальский', native: 'বাংলা' },
-            { code: 'my', name: 'Мьянманский', native: 'မြန်မာ' },
-            { code: 'km', name: 'Кхмерский', native: 'ខ្មែរ' },
-            { code: 'lo', name: 'Лаосский', native: 'ລາວ' },
-            { code: 'mn', name: 'Монгольский', native: 'Монгол' },
-            { code: 'ne', name: 'Непальский', native: 'नेपाली' },
-            { code: 'si', name: 'Сингальский', native: 'සිංහල' },
         ];
-
         const POPULAR_CODES = ['en', 'ru', 'kk', 'tr', 'zh'];
 
-        // DOM
+        // ----- DOM -----
         const fromSelector = document.getElementById('fromSelector');
         const toSelector = document.getElementById('toSelector');
         const fromLabel = document.getElementById('fromLabel');
@@ -505,23 +1112,33 @@
         const copyOutBtn = document.getElementById('copyOutBtn');
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = document.getElementById('themeIcon');
-        const logoIcon = document.getElementById('logoIcon');
-
         const modalOverlay = document.getElementById('modalOverlay');
         const searchInput = document.getElementById('searchInput');
         const modalList = document.getElementById('modalList');
         const modalClose = document.getElementById('modalClose');
         const tabsContainer = document.getElementById('tabsContainer');
 
-        // State
-        let currentFrom = 'ru';
-        let currentTo = 'en';
+        // Элементы голосовой модалки
+        const voiceOverlay = document.getElementById('voiceOverlay');
+        const voiceText = document.getElementById('voiceText');
+        const voiceHint = document.getElementById('voiceHint');
+        const voiceCloseBtn = document.getElementById('voiceCloseBtn');
+        const voiceCircle = document.getElementById('voiceCircle');
+        const rings = [document.getElementById('ring1'), document.getElementById('ring2'), document.getElementById('ring3')];
+
+        // ----- STATE -----
+        let currentFrom = 'en';
+        let currentTo = 'ru';
         let currentOutput = '';
         let translateTimer = null;
         let recentLangs = JSON.parse(localStorage.getItem('recentLangs') || '[]');
         if (recentLangs.length > 5) recentLangs = recentLangs.slice(0, 5);
         let activeTarget = 'from';
+        let isRecording = false;
+        let recognition = null;
+        let voiceTextTimeout = null;
 
+        // ----- ВСПОМОГАТЕЛЬНЫЕ -----
         function getLangByCode(code) {
             return LANGS.find(l => l.code === code) || { code, name: code, native: code };
         }
@@ -529,8 +1146,14 @@
         function updateLabels() {
             const fromLang = getLangByCode(currentFrom);
             const toLang = getLangByCode(currentTo);
-            fromLabel.textContent = fromLang.native;
-            toLabel.textContent = toLang.native;
+            fromLabel.style.opacity = '0';
+            toLabel.style.opacity = '0';
+            setTimeout(() => {
+                fromLabel.textContent = fromLang.native;
+                toLabel.textContent = toLang.native;
+                fromLabel.style.opacity = '1';
+                toLabel.style.opacity = '1';
+            }, 150);
             langBadge.textContent = currentTo.toUpperCase();
         }
 
@@ -541,21 +1164,21 @@
             localStorage.setItem('recentLangs', JSON.stringify(recentLangs));
         }
 
-        // Translation
+        // ----- ПЕРЕВОД -----
         async function translateText(text, sl, tl) {
             if (!text.trim()) return '';
             try {
-                const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q=${encodeURIComponent(text)}`;
+                const url =
+                    `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q=${encodeURIComponent(text)}`;
                 const resp = await fetch(url);
                 const data = await resp.json();
                 if (data && data[0]) {
                     return data[0].map(item => item[0]).join('');
                 }
-            } catch (e) {
-                console.warn('Google Translate error, trying MyMemory...');
-            }
+            } catch (e) { /* fallback */ }
             try {
-                const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sl}|${tl}`;
+                const url =
+                    `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sl}|${tl}`;
                 const resp = await fetch(url);
                 const data = await resp.json();
                 if (data.responseData && data.responseData.translatedText) {
@@ -571,21 +1194,20 @@
             const tl = currentTo;
             if (!text.trim()) {
                 outputText.textContent = '';
-                outputText.classList.remove('loading', 'placeholder');
+                outputText.className = 'output placeholder';
                 return;
             }
             outputText.textContent = 'Переводим…';
-            outputText.classList.add('loading');
-            outputText.classList.remove('placeholder');
+            outputText.className = 'output loading';
             try {
                 const result = await translateText(text, sl, tl);
                 currentOutput = result;
                 outputText.textContent = result;
-                outputText.classList.remove('loading');
+                outputText.className = 'output reveal';
+                setTimeout(() => outputText.classList.remove('reveal'), 500);
             } catch (e) {
                 outputText.textContent = 'Ошибка: ' + e.message;
-                outputText.classList.remove('loading');
-                outputText.classList.add('placeholder');
+                outputText.className = 'output placeholder';
             }
         }
 
@@ -607,19 +1229,19 @@
             if (target === 'to') langBadge.textContent = currentTo.toUpperCase();
         }
 
-        // Modal
+        // ----- МОДАЛКА ВЫБОРА ЯЗЫКА -----
         function openModal(target) {
             activeTarget = target;
-            modalOverlay.style.display = 'flex';
+            modalOverlay.classList.add('open');
             searchInput.value = '';
             renderTab('recent');
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelector('.tab-btn[data-tab="recent"]').classList.add('active');
-            searchInput.focus();
+            setTimeout(() => searchInput.focus(), 300);
         }
 
         function closeModal() {
-            modalOverlay.style.display = 'none';
+            modalOverlay.classList.remove('open');
         }
 
         function renderTab(tab) {
@@ -692,7 +1314,7 @@
             if (activeTab) renderTab(activeTab.dataset.tab);
         });
 
-        // Swap
+        // ----- ОБМЕН ЯЗЫКОВ -----
         swapBtn.addEventListener('click', () => {
             const temp = currentFrom;
             currentFrom = currentTo;
@@ -708,48 +1330,213 @@
             langBadge.textContent = currentTo.toUpperCase();
         });
 
-        // Voice
+        // ================================================================
+        //  ГОЛОСОВОЙ ВВОД (УНИВЕРСАЛЬНЫЙ ЯЗЫК)
+        // ================================================================
+
+        function showVoiceModal() {
+            voiceOverlay.classList.add('open');
+            voiceText.textContent = 'Говорите…';
+            voiceText.className = 'voice-text';
+            voiceHint.textContent = 'Нажмите «Остановить», чтобы завершить';
+            voiceCloseBtn.textContent = 'Остановить';
+            voiceCloseBtn.disabled = false;
+            // Активируем анимацию
+            voiceCircle.classList.add('pulse');
+            rings.forEach(r => r.classList.add('active'));
+            if (voiceTextTimeout) clearTimeout(voiceTextTimeout);
+        }
+
+        function hideVoiceModal(finalText) {
+            voiceOverlay.classList.remove('open');
+            voiceCircle.classList.remove('pulse');
+            rings.forEach(r => r.classList.remove('active'));
+            if (voiceTextTimeout) clearTimeout(voiceTextTimeout);
+            if (finalText) {
+                // Добавляем текст в поле ввода
+                if (inputText.value && !inputText.value.endsWith(' ')) {
+                    inputText.value += ' ';
+                }
+                inputText.value += finalText;
+                inputText.dispatchEvent(new Event('input'));
+            }
+            if (recognition) {
+                try { recognition.abort(); } catch (e) {}
+                recognition = null;
+            }
+            isRecording = false;
+            voiceBtn.classList.remove('active');
+        }
+
+        voiceCloseBtn.addEventListener('click', () => {
+            if (recognition) {
+                try { recognition.abort(); } catch (e) {}
+                recognition = null;
+            }
+            isRecording = false;
+            voiceBtn.classList.remove('active');
+            hideVoiceModal(null);
+        });
+
         voiceBtn.addEventListener('click', () => {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!SpeechRecognition) {
-                alert('Голосовой ввод поддерживается только в Chrome.');
+                alert('Голосовой ввод работает в Chrome, Edge или Safari.');
                 return;
             }
-            if (voiceBtn.classList.contains('active')) {
-                if (window.recognition) window.recognition.stop();
+            if (isRecording) {
+                if (recognition) {
+                    try { recognition.abort(); } catch (e) {}
+                    recognition = null;
+                }
+                isRecording = false;
                 voiceBtn.classList.remove('active');
+                hideVoiceModal(null);
                 return;
             }
-            const rec = new SpeechRecognition();
-            rec.lang = currentFrom;
-            rec.continuous = false;
-            rec.interimResults = false;
-            rec.onstart = () => voiceBtn.classList.add('active');
-            rec.onresult = (e) => {
-                const transcript = e.results[0][0].transcript;
-                inputText.value += ' ' + transcript;
-                inputText.dispatchEvent(new Event('input'));
+
+            // Определяем локаль для распознавания на основе выбранного языка
+            let langCode = currentFrom;
+            const langMap = {
+                'en': 'en-US',
+                'ru': 'ru-RU',
+                'kk': 'kk-KZ',
+                'tr': 'tr-TR',
+                'de': 'de-DE',
+                'fr': 'fr-FR',
+                'es': 'es-ES',
+                'it': 'it-IT',
+                'pt': 'pt-PT',
+                'zh': 'zh-CN',
+                'ja': 'ja-JP',
+                'ko': 'ko-KR',
+                'uk': 'uk-UA',
+                'pl': 'pl-PL',
+                'nl': 'nl-NL'
             };
-            rec.onerror = () => voiceBtn.classList.remove('active');
-            rec.onend = () => voiceBtn.classList.remove('active');
-            window.recognition = rec;
-            rec.start();
+            if (langMap[langCode]) langCode = langMap[langCode];
+            else langCode = langCode + '-' + langCode.toUpperCase();
+
+            try {
+                const rec = new SpeechRecognition();
+                rec.lang = langCode;
+                rec.continuous = false;
+                rec.interimResults = true;
+                rec.maxAlternatives = 1;
+
+                let finalText = '';
+
+                rec.onstart = () => {
+                    isRecording = true;
+                    voiceBtn.classList.add('active');
+                    showVoiceModal();
+                };
+
+                rec.onresult = (event) => {
+                    let interim = '';
+                    let final = '';
+                    for (let i = event.resultIndex; i < event.results.length; i++) {
+                        const transcript = event.results[i][0].transcript;
+                        if (event.results[i].isFinal) {
+                            final += transcript;
+                        } else {
+                            interim += transcript;
+                        }
+                    }
+                    if (final) {
+                        finalText = final;
+                        voiceText.textContent = final;
+                        voiceText.className = 'voice-text final';
+                        // Автозакрытие через 0.8 секунды
+                        if (voiceTextTimeout) clearTimeout(voiceTextTimeout);
+                        voiceTextTimeout = setTimeout(() => {
+                            hideVoiceModal(finalText);
+                        }, 800);
+                    } else if (interim) {
+                        voiceText.textContent = interim;
+                        voiceText.className = 'voice-text interim';
+                    }
+                };
+
+                rec.onerror = (event) => {
+                    console.warn('Speech error:', event.error);
+                    if (event.error === 'not-allowed') {
+                        alert('Разрешите доступ к микрофону.');
+                    }
+                    if (event.error !== 'no-speech') {
+                        hideVoiceModal(null);
+                    } else {
+                        voiceText.textContent = 'Не удалось распознать речь. Попробуйте снова.';
+                        voiceText.className = 'voice-text';
+                        voiceHint.textContent = 'Нажмите «Остановить»';
+                    }
+                };
+
+                rec.onend = () => {
+                    isRecording = false;
+                    voiceBtn.classList.remove('active');
+                    if (!voiceText.textContent || voiceText.textContent === 'Говорите…') {
+                        hideVoiceModal(null);
+                    }
+                };
+
+                recognition = rec;
+                rec.start();
+            } catch (e) {
+                alert('Ошибка: ' + e.message);
+            }
         });
 
-        // Speak
+        // ================================================================
+        //  ОЗВУЧИВАНИЕ (СБРОС + ЛУЧШИЕ ГОЛОСА)
+        // ================================================================
+        function getBestVoice(lang) {
+            const voices = window.speechSynthesis.getVoices();
+            let preferred = [];
+            if (lang === 'en') {
+                preferred = voices.filter(v => v.lang.startsWith('en') && v.name.includes('Google UK') && v.name.includes(
+                    'Female'));
+                if (preferred.length === 0) preferred = voices.filter(v => v.lang.startsWith('en') && v.name.includes(
+                    'Google'));
+                if (preferred.length === 0) preferred = voices.filter(v => v.lang.startsWith('en'));
+            } else if (lang === 'ru') {
+                preferred = voices.filter(v => v.lang.startsWith('ru') && v.name.includes('Google'));
+                if (preferred.length === 0) preferred = voices.filter(v => v.lang.startsWith('ru'));
+            } else {
+                preferred = voices.filter(v => v.lang.startsWith(lang));
+            }
+            if (preferred.length > 0) return preferred[0];
+            return voices.find(v => v.lang.startsWith(lang)) || null;
+        }
+
         function speak(text, lang) {
             if (!text) return;
             if (window.speechSynthesis) {
+                if (window.speechSynthesis.speaking) {
+                    window.speechSynthesis.cancel();
+                }
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = lang;
-                speechSynthesis.speak(utterance);
+                utterance.rate = 0.9;
+                utterance.pitch = 1;
+                const bestVoice = getBestVoice(lang);
+                if (bestVoice) utterance.voice = bestVoice;
+                window.speechSynthesis.speak(utterance);
             }
         }
+
+        if (window.speechSynthesis) {
+            window.speechSynthesis.getVoices();
+            window.speechSynthesis.onvoiceschanged = () => {
+                window.speechSynthesis.getVoices();
+            };
+        }
+
         speakInBtn.addEventListener('click', () => speak(inputText.value, currentFrom));
         speakOutBtn.addEventListener('click', () => speak(currentOutput || outputText.textContent, currentTo));
 
-        // Copy
-        function copy(text, btn) {
+        // ----- КОПИРОВАНИЕ -----
+        function copyText(text, btn) {
             if (!text) return;
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(text).then(() => {
@@ -760,6 +1547,7 @@
                 fallbackCopy(text, btn);
             }
         }
+
         function fallbackCopy(text, btn) {
             const ta = document.createElement('textarea');
             ta.value = text;
@@ -774,10 +1562,10 @@
             } catch (e) {}
             document.body.removeChild(ta);
         }
-        copyInBtn.addEventListener('click', () => copy(inputText.value, copyInBtn));
-        copyOutBtn.addEventListener('click', () => copy(currentOutput || outputText.textContent, copyOutBtn));
+        copyInBtn.addEventListener('click', () => copyText(inputText.value, copyInBtn));
+        copyOutBtn.addEventListener('click', () => copyText(currentOutput || outputText.textContent, copyOutBtn));
 
-        // Counter
+        // ----- СЧЁТЧИК -----
         inputText.addEventListener('input', () => {
             const len = inputText.value.length;
             counter.textContent = len + ' / 5000';
@@ -790,10 +1578,12 @@
             scheduleTranslation();
         });
 
-        // ========== ТЕМА С УЛУЧШЕННЫМИ ИКОНКАМИ ==========
+        // ----- ТЕМА -----
         let isDark = localStorage.getItem('theme') === 'dark';
-        const sunIcon = `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12[...]
-        const moonIcon = `<svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
+        const sunIcon =
+            `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m4.93 19.07 1.41-1.41"/><path d="m17.66 6.34 1.41-1.41"/></svg>`;
+        const moonIcon =
+            `<svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
 
         function setTheme(dark) {
             isDark = dark;
@@ -801,32 +1591,44 @@
             localStorage.setItem('theme', dark ? 'dark' : 'light');
             themeIcon.innerHTML = dark ? sunIcon : moonIcon;
         }
-
-        // Инициализация темы
         setTheme(isDark);
-
         themeToggle.addEventListener('click', () => {
             setTheme(!isDark);
         });
 
-        // Init
-        if (recentLangs.length >= 2) {
-            currentFrom = recentLangs[0];
-            currentTo = recentLangs[1];
-        } else if (recentLangs.length === 1) {
-            currentFrom = recentLangs[0];
-        }
-        if (!LANGS.find(l => l.code === currentFrom)) currentFrom = 'ru';
-        if (!LANGS.find(l => l.code === currentTo)) currentTo = 'en';
+        // ================================================================
+        //  ИНИЦИАЛИЗАЦИЯ
+        // ================================================================
+        const savedFrom = localStorage.getItem('lumi_from');
+        const savedTo = localStorage.getItem('lumi_to');
+        if (savedFrom && LANGS.find(l => l.code === savedFrom)) currentFrom = savedFrom;
+        if (savedTo && LANGS.find(l => l.code === savedTo)) currentTo = savedTo;
+        if (!savedFrom) currentFrom = 'en';
+        if (!savedTo) currentTo = 'ru';
+
         updateLabels();
         langBadge.textContent = currentTo.toUpperCase();
-        setTimeout(performTranslation, 300);
+        inputText.value = 'Welcome to LumiTranslate';
+        setTimeout(performTranslation, 400);
+
+        const origSetLanguage = setLanguage;
+        setLanguage = function(target, code) {
+            origSetLanguage(target, code);
+            if (target === 'from') localStorage.setItem('lumi_from', code);
+            else localStorage.setItem('lumi_to', code);
+        };
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
+            if (e.key === 'Escape') {
+                closeModal();
+                if (voiceOverlay.classList.contains('open')) {
+                    hideVoiceModal(null);
+                }
+            }
         });
 
-        console.log('LumiTranslate загружен. Иконки солнца/луны обновлены.');
+        console.log('🚀 LumiTranslate с минималистичной голосовой анимацией загружен!');
+        console.log('🎤 Язык распознавания:', currentFrom);
     </script>
 </body>
 </html>
