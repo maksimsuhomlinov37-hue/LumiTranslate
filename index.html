@@ -1,30 +1,31 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     
-    <!-- ===== SEO ДЛЯ GOOGLE ===== -->
+    <!-- ===== SEO ===== -->
     <title>LumiTranslate — бесплатный переводчик с голосом</title>
     <meta name="description" content="LumiTranslate — бесплатный онлайн-переводчик с голосовым вводом, озвучкой текста и поддержкой 50+ языков. Просто, быстро, без рекламы." />
-    <meta name="keywords" content="переводчик, бесплатный, голосовой перевод, LumiTranslate, онлайн перевод, русский, английский, казахский" />
+    <meta name="keywords" content="переводчик, бесплатный, голосовой перевод, LumiTranslate, онлайн перевод" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://maksimsuhomlinov37-hue.github.io/LumiTranslate/" />
     
-    <!-- ===== OPEN GRAPH (для соцсетей) ===== -->
+    <!-- ===== OPEN GRAPH ===== -->
     <meta property="og:title" content="LumiTranslate — бесплатный переводчик" />
     <meta property="og:description" content="Переводи текст, говори голосом, слушай произношение. 50+ языков." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://maksimsuhomlinov37-hue.github.io/LumiTranslate/" />
-    <meta property="og:image" content="https://maksimsuhomlinov37-hue.github.io/LumiTranslate/og-image.png" />
+    <meta property="og:image" content="https://maksimsuhomlinov37-hue.github.io/LumiTranslate/LumiTranslate-Favicon.png" />
+    
+    <!-- ===== ФАВИКОН ===== -->
+    <link rel="icon" type="image/png" href="LumiTranslate-Favicon.png" />
     
     <!-- ===== ШРИФТЫ ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
 
-    <!-- ===== ДИЗАЙН ===== -->
     <style>
         /* ===== БАЗА ===== */
         * {
@@ -64,24 +65,31 @@
             align-items: center;
             gap: 12px;
         }
+        /* ===== ЛОГОТИП — ТОЛЬКО КАРТИНКА, БЕЗ ФОНА ===== */
         .logo-icon {
             width: 42px;
             height: 42px;
             border-radius: 14px;
-            background: #2563ff;
-            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
-            font-size: 22px;
-            box-shadow: 0 6px 20px rgba(37, 99, 255, 0.25);
+            overflow: hidden;
+            background: transparent; /* убираем синий фон */
+            box-shadow: none;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* чтобы картинка вписалась без искажений */
+            border-radius: 14px;
+            display: block;
         }
         .logo-icon:hover {
             transform: scale(1.04);
-            box-shadow: 0 8px 28px rgba(37, 99, 255, 0.35);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
         }
+
         .logo-text {
             font-size: 22px;
             font-weight: 700;
@@ -746,9 +754,7 @@
             color: #8e97af;
         }
 
-        /* ==============================================================
-           ПРОФЕССИОНАЛЬНАЯ АНИМАЦИЯ ГОЛОСА
-           ============================================================== */
+        /* ===== АНИМАЦИЯ ГОЛОСА (минималистичная) ===== */
         .voice-overlay {
             position: fixed;
             inset: 0;
@@ -985,9 +991,12 @@
 <body>
 
     <div class="container">
+        <!-- ===== ХЕДЕР ===== -->
         <header class="header">
             <div class="logo">
-                <div class="logo-icon">L</div>
+                <div class="logo-icon">
+                    <img src="LumiTranslate-Favicon.png" alt="LumiTranslate" />
+                </div>
                 <div class="logo-text">Lumi<span>Translate</span></div>
             </div>
             <button class="theme-btn" id="themeToggle" aria-label="Переключить тему">
@@ -995,6 +1004,7 @@
             </button>
         </header>
 
+        <!-- ===== КАРТОЧКА ===== -->
         <div class="card">
             <div class="lang-bar">
                 <div class="lang-selector" id="fromSelector" data-target="from">
@@ -1087,7 +1097,7 @@
 
     <script>
         // ================================================================
-        //  LUMITRANSLATE — ГОТОВАЯ ВЕРСИЯ ДЛЯ ПУБЛИКАЦИИ
+        //  LUMITRANSLATE — ФИНАЛЬНАЯ ВЕРСИЯ (ЛОГОТИП ИСПРАВЛЕН)
         // ================================================================
 
         // ----- ДАННЫЕ ЯЗЫКОВ -----
@@ -1621,7 +1631,7 @@
             }
         });
 
-        console.log('🚀 LumiTranslate готов к публикации!');
+        console.log('🚀 LumiTranslate — финальная версия с логотипом загружена!');
     </script>
 </body>
 </html>
